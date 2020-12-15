@@ -1,0 +1,2258 @@
+ALGORITHME : combat
+
+
+
+//BUT : réaliser un combat entre deux pokémons
+//ENTREE : des entiers représentants des actions
+//SORTIE : lequel des deux pokémons l'emporte
+
+
+VAR pv_allie, pv_allie_max, lvl_allie, xp_allie, xp_allie_max, atq_allie pv_allie2, pv_allie2_max, lvl_allie2, xp_allie2, xp_allie2_max, atq_allie2, pv_allie3, pv_allie3_max, lvl_allie3, xp_allie3, xp_allie3_max, atq_allie3 pv_ennemi, pv_ennemi_max, atq_ennemi, touche, touche_objet, nbr_potion, nbr_pokeball, chance_fuite, chance_capture : ENTIER
+	nom_Ennemi, nom_Allie type_allie, type_ennemi : CHAINE
+	fuite, dresseur: BOOLEEN
+
+
+procedure affiche_intro
+//BUT afficher l'illustration de l'intro
+//ENTREE rien
+//SORTIE l illustration de l intro
+
+DEBUT
+	ECRIRE "   	 o     "
+	ECRIRE "    /|\    "
+	ECRIRE "    / \    "
+FIN
+
+procedure affiche_histoire1_1
+//BUT afficher l'illustration de l'histoire 1
+//ENTREE rien
+//SORTIE l illustration de la première phase d' histoire
+DEBUT
+	ECRIRE"               ,@@@@@@@,                   "
+	ECRIRE"       ,,,.   ,@@@@@@/@@,  .oo8888o.       "
+	ECRIRE"    ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o      "
+	ECRIRE"   ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88'     "
+	ECRIRE"   %&&%&%&/%&&%@@\@@/ /@@@88888\88888'     "
+	ECRIRE"   %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'      "
+	ECRIRE"   `&%\ ` /%&'    |.|        \ '|8'        "
+	ECRIRE"       |o|        | |         | |          "
+	ECRIRE"       |.|        | |         | |          "
+	ECRIRE"   \\/ ._\//_/__/  ,\_//__\\/.  \_//__/_   "
+FIN
+
+
+procedure affiche_histoire1_2
+//BUT afficher l'illustration de l'histoire 1
+//ENTREE rien
+//SORTIE l illustration de la première phase d' histoire
+DEBUT
+	ECRIRE"               ,@@@@@@@,                         "
+	ECRIRE"       ,,,.   ,@@@@@@/@@,  .oo8888o.             "
+	ECRIRE"    ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o            "
+	ECRIRE"   ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88'           "
+	ECRIRE"   %&&%&%&/%&&%@@\@@/ /@@@88888\88888'           "
+	ECRIRE"   %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'         \\ "
+	ECRIRE"   `&%\ ` /%&'    |.|        \ '|8'           (o>"
+	ECRIRE"       |o|        | |         | |          \\_//)"
+	ECRIRE"       |.|        | |         | |           \_/_)"
+	ECRIRE"   \\/ ._\//_/__/  ,\_//__\\/.  \_//__/_     _|_ "
+FIN
+
+procedure affiche_histoire2_1
+//BUT afficher l'illustration de l'histoire 2
+//ENTREE rien
+//SORTIE l illustration de la seconde phase d' histoire
+DEBUT
+	ECRIRE "	        `'::.                "
+	ECRIRE "    _________H ,%%&%,            "
+	ECRIRE "   /\     _   \%&&%%&%           "
+	ECRIRE "  /  \___/^\___\%&%%&&           "
+	ECRIRE "  |  | []   [] |%\Y&%'           "
+	ECRIRE "  |  |   .-.   | ||              "
+	ECRIRE "~~@._|@@_|||_@@|~||~~~~~~~~~~~~~ "
+	ECRIRE "     `""") )"""`                 "
+FIN
+
+procedure affiche_histoire2_2
+//BUT afficher l'illustration de l'histoire 2
+//ENTREE rien
+//SORTIE l illustration de la seconde phase d' histoire
+DEBUT
+	ECRIRE "	      .------.    "
+	ECRIRE "         /        \   "
+	ECRIRE "       .' /  \     `. "
+	ECRIRE "_______|____________| "
+FIN
+
+procedure affiche_histoire2_3
+//BUT afficher l'illustration de l'histoire 2
+//ENTREE rien
+//SORTIE l illustration de la seconde phase d' histoire
+DEBUT
+	ECRIRE "`;-.          ___,          "
+	ECRIRE "  `.`\_...._/`.-"`          "
+	ECRIRE "    \        /      ,       "
+	ECRIRE "    /()   () \    .' `-._   " 
+	ECRIRE "   |)  .    ()\  /   _.'    "
+	ECRIRE "   \  -'-     ,; '. <       "
+	ECRIRE "    ;.__     ,;|   > \      "
+	ECRIRE "   / ,    / ,  |.-'.-'      "
+	ECRIRE "  (_/    (_/ ,;|.<`         "
+	ECRIRE "    \    ,     ;-`          "
+	ECRIRE "     >   \    /             "
+	ECRIRE "    (_,-'`> .'              "
+	ECRIRE "         (_,'               "
+FIN
+
+procedure affiche_histoire3
+//BUT afficher l'illustration de l'histoire 3
+//ENTREE rien
+//SORTIE l illustration de la troisieme phase d' histoire
+DEBUT
+	ECRIRE "          /\                                                                "
+	ECRIRE "         /**\                                                               "
+	ECRIRE "        /****\   /\                                                         "
+	ECRIRE "       /      \ /**\                                                        "
+	ECRIRE "      /  /\    /    \        /\    /\  /\      /\            /\/\/\  /\     "
+	ECRIRE "     /  /  \  /      \      /  \/\/  \/  \  /\/  \/\  /\  /\/ / /  \/  \    "
+	ECRIRE "    /  /    \/ /\     \    /    \ \  /    \/ /   /  \/  \/  \  /    \   \   "
+	ECRIRE "   /  /      \/  \/\   \  /      \    /   /    \                            "
+	ECRIRE "__/__/_______/___/__\___\__________________________________________________ "
+FIN
+
+procedure affiche_histoire4
+//BUT afficher l'illustration de l'histoire 4
+//ENTREE rien
+//SORTIE l illustration de la quatrieme phase d' histoire
+DEBUT
+	ECRIRE "                                   /\                                "
+	ECRIRE "                              /\  //\\                               "
+	ECRIRE "                       /\    //\\///\\\        /\                    "
+	ECRIRE "                      //\\  ///\////\\\\  /\  //\\                   "
+	ECRIRE "         /\          /  ^ \/^ ^/^  ^  ^ \/^ \/  ^ \                  "
+	ECRIRE "        / ^\    /\  / ^   /  ^/ ^ ^ ^   ^\ ^/  ^^  \                 "
+	ECRIRE "       /^   \  / ^\/ ^ ^   ^ / ^  ^    ^  \/ ^   ^  \       *        "
+	ECRIRE "      /  ^ ^ \/^  ^\ ^ ^ ^   ^  ^   ^   ____  ^   ^  \     /|\       "
+	ECRIRE "     / ^ ^  ^ \ ^  _\___________________|  |_____^ ^  \   /||o\      "
+	ECRIRE "    / ^^  ^ ^ ^\  /______________________________\ ^ ^ \ /|o|||\     "
+	ECRIRE "   /  ^  ^^ ^ ^  /________________________________\  ^  /|||||o|\    "
+	ECRIRE "  /^ ^  ^ ^^  ^    ||___|___||||||||||||___|__|||      /||o||||||\   "
+	ECRIRE " / ^   ^   ^    ^  ||___|___||||||||||||___|__|||          | |       " 
+	ECRIRE "/ ^ ^ ^  ^  ^  ^   ||||||||||||||||||||||||||||||oooooooooo| |ooooooo"
+	ECRIRE "ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
+
+FIN
+
+procedure affiche_allie
+//BUT Afficher les pokémons alliés.
+//ENTREE rien
+//SORTIE l affichage du pokémon
+
+DEBUT
+	
+		CAS nom_allie PARMIS
+
+			CAS "Salameche" : 
+								ECRIRE "	          		  _.--""`-.                                     	 		"
+								ECRIRE "		            ,           `.                                  	 		"
+								ECRIRE "		          ,           __   .                                	 		"
+								ECRIRE "		         /|          " __   \                               	 		"
+								ECRIRE "		        , |           / |.   .                              	 		"
+								ECRIRE "		        |,           !_. |   |                              	 		"
+								ECRIRE "		      ,                  |   |                              	 		"
+								ECRIRE "		     /              |`-- |   |                              	 		"
+								ECRIRE "		    |                `---    |                              	 		"
+								ECRIRE "		     .   ,                   |                       ,".    	 		"
+								ECRIRE "		      ._                 _   |                    ,   \ `   	 		"
+								ECRIRE "		  `.. `.`-...___,...---""    |       __,.        ,`"   L,|  	 		"
+								ECRIRE "		  |, `- .`._        _,-,.    .  __.- -. /        .   ,    \ 	 		"
+								ECRIRE "		-:..     `. `-..--_.,.<       `"      / `.        `-/ |   . 	 		"
+								ECRIRE "		  `,         """"      `.              ,          |   |   ,,	 		"
+								ECRIRE "		    `.                                /               | . |/	 		"
+								ECRIRE "		      `.   |              \       _,-            |          	 		"
+								ECRIRE "		        `._                \    "\                .      |  	 		"
+								ECRIRE "		           |                      \                `._  ,   	 		"
+								ECRIRE "		           |                       \                 . |    	 		"
+								ECRIRE "		           |                 .      \                | |    	 		"
+								ECRIRE "		           |                 |       L              ,  |    	 		"
+								ECRIRE "		           `                 |       |             /        	 		"
+								ECRIRE "		            \                |       |           ,    /     	 		"
+								ECRIRE "		          ,  \               |  _.._ ,-..___,..-     ,      	 		"
+								ECRIRE "		         /     .             .      `!             ,j       	 		"
+								ECRIRE "		        /       `.          /        .           . /        	 		"
+								ECRIRE "		       .          `.       /         |        _. .          	 		"
+								ECRIRE "		        `.          7` ---           |------" _.            	 		"
+								ECRIRE "		       _,.`,_     _                 ,  -----"               	 		"
+								ECRIRE "		   _,-_            `.     .       ,\                        	 		"
+								ECRIRE "		   -" /`.         _,      | _  _  _.|                       	 		"
+								ECRIRE "		    ""-- ---"""""         `   ! |! /                        	 		"
+								ECRIRE "		                            `" "	                        	 		"
+			
+			CAS "Carapuce"	:
+								ECRIRE "                _,........__                                             		"
+								ECRIRE "             ,-             "`-.                                         		"
+								ECRIRE "           ,                    `-.                                      		"
+								ECRIRE "         ,                         \                                     		"
+								ECRIRE "       ,                            .                                    		"
+								ECRIRE "       . \               ,"".       `                                    		"
+								ECRIRE "      ._. |             / |  `       \                                   		"
+								ECRIRE "      |   |            `-.   ||       `.                                 		"
+								ECRIRE "      |   |             -._, ||       | \                                		"
+								ECRIRE "      .`.,              `.., .        , |`-.                             		"
+								ECRIRE "      l                       . `.  _/  |   `.                           		"
+								ECRIRE "      `-.._ -   ,          _ _    -" \  .     `                          		"
+								ECRIRE " `.""""" -.`-...,--------- ,          `. `....__.                        		"
+								ECRIRE " .         `"-..___      __, \          \  \     \                       		"
+								ECRIRE " \_ .          |   `""""     `.           . \     \                      		"
+								ECRIRE "   `.          |              `.          |  .     L                     		"
+								ECRIRE "     `.        |`--...________. .        j   |     |                     		"
+								ECRIRE "       `._    .       |          `.     .|   ,     |                     		"
+								ECRIRE "          `--,\       .            `7""  |  ,      |                     		"
+								ECRIRE "             ` `      `            /     |  |      |    _,- """`-.       		"
+								ECRIRE "              \ `.     .          /      |         |  ,           `.     		"
+								ECRIRE "               \  v.__  .                .   \    /| /              \    		"
+								ECRIRE "                \/    `""\"""""""`.       \   \  /.                  |   		"
+								ECRIRE "                 `        .        `._ ___,j.  `/ .-       ,---.     |   		"
+								ECRIRE "                 ,`-.      \         ."     `.  |/        j     `    |   		"
+								ECRIRE "                /    `.     \       /         \ /         |     /    j   		"
+								ECRIRE "               |       `-.   7-.._ .          |"                    /    		"
+								ECRIRE "               |          `./_    `|          |            .     _,      		"
+								ECRIRE "               `.           / `----|          |-............`---         		"
+								ECRIRE "                 \          \      |          |                          		"
+								ECRIRE "                ,            )     `.         |                          		"
+								ECRIRE "                 7____,,..--       /          |                          		"
+								ECRIRE "                                   `---.__,--.                           		"
+			
+			CAS "Bulbizarre":
+								ECRIRE "                                               /                         		"
+								ECRIRE "                            _,.------....___,.   ,.-.                    		"
+								ECRIRE "                         ,-           _,.--"        |                    		"
+								ECRIRE "                       ,          _.-               .                    		"
+								ECRIRE "                      /   ,     ,                    `                   		"
+								ECRIRE "                     .   /     /                     ``.                 		"
+								ECRIRE "                     |  |     .                       \.\                		"
+								ECRIRE "           ____      |___._.  |       __               \ `.              		"
+								ECRIRE "         .     `---""       ``"-.--" `  \               .  \             		"
+								ECRIRE "        .  ,            __               `              |   .            		"
+								ECRIRE "        `,          ,-"   .               \             |    L           		"
+								ECRIRE "       ,                _.                 -._          /    |           		"
+								ECRIRE "      ,`-.    ,".   `--                       >.      ,      |           		"
+								ECRIRE "     . . \    `-        __    ,  ,-.         /  `.__.-      ,            		"
+								ECRIRE "     ||:, .           ,      /  / \ `        `.    .      . /            		"
+								ECRIRE "     j|:D  \          `--     , _  . .         `.__, \   , /             		"
+								ECRIRE "    / L:_  |                 .  "  :_                 `. .               		"
+								ECRIRE "    .    ""                   """""                     V                		"
+								ECRIRE "     `.                                 .    `.   _,..  `                		"
+								ECRIRE "       `,_   .    .                _,- /    .. `,    __  `               		"
+								ECRIRE "        ) \`._        ___....----"   ,    .   \ |      \  .              		"
+								ECRIRE "       /   `. "`-.--"          _,  ,      `---  |    `./  |              		"
+								ECRIRE "      .   _  `"" --.._____..--"   ,                       |              		"
+								ECRIRE "      | ." `. `-.                /-.           /          ,              		"
+								ECRIRE "      | `._.     `,_               /         ,           .               		"
+								ECRIRE "     .           /| `-.        . ,          ,           ,                		"
+								ECRIRE "      -.__ __ _, ,      `-..___ -...__   ,. \ ____.___.                  		"
+								ECRIRE "     `"^-- ..     -`-^- "--    `-^- `.  """""`.,^.`.--                   		"
+
+			CAS "Roucool"	:
+								ECRIRE "                      .,                                                 		"
+								ECRIRE "               , _.- ,                                                   		"
+								ECRIRE "             ""|"    `"""".,                                             		"
+								ECRIRE "            / /       __.- -"/                                           		"
+								ECRIRE "            ,   _,--""       -._                                         		"
+								ECRIRE "       _...`... ."""""".\""-----                                         		"
+								ECRIRE "    ,-           `-.) /  `.  \                                           		"
+								ECRIRE "   +---."-.    |     `.    .  \                                          		"
+								ECRIRE "        \  `.  |       \   |   L                                         		"
+								ECRIRE "         `v  ,-j        , .    |                                         		"
+								ECRIRE "        . \,  /        /,       -._                                      		"
+								ECRIRE "       ,____.         .            `-.                                   		"
+								ECRIRE "           |         /                `-.                                		"
+								ECRIRE "          /          `.                  `-.                             		"
+								ECRIRE "         /             `. |                 `.                  _.       		"
+								ECRIRE "        .                `|                 ,-.             _.-" .       		"
+								ECRIRE "       j                  |                 |  \         _.     /        		"
+								ECRIRE "       .                  |               .     \     ,-       /         		"
+								ECRIRE "       |                  |            ,-.\      \  ,       _.-          		"
+								ECRIRE "       |                .    `.       |   `      `v   _,.-"/             		"
+								ECRIRE "       ||    \          |  ` |(` -`.,.j         \ `.- ----+---.          		"
+								ECRIRE "       | |   |L    \  | |   `|   \               L \___      /           		"
+								ECRIRE "         L   |`     L | |     `.                 | j   `"""-             		"
+								ECRIRE "          `- ||\    | ||j       `.       ._    `  .                      		"
+								ECRIRE "             `\  "`^"-            `.       \    |/|                      		"
+								ECRIRE "               `._                  `-.     \   Y |                      		"
+								ECRIRE "       __,..-""`..`._                  `-._  `\ `.|                      		"
+								ECRIRE "      +.....>+----.  ""----.........,--""" `--. .                        		"
+								ECRIRE "          ,  _\  ,..--.-"  __>---   |                                    		"
+								ECRIRE "         --""  "   _." }<""          `---""`._                           		"
+								ECRIRE "                  /..."  L__.+--   _,...... ..                           		"
+								ECRIRE "                    /.-"" /   \ ,-                                       		"
+								ECRIRE "                        .  ,-""                                          		"
+								ECRIRE "                       /.-                                               		"
+
+			CAS "Ratata"	:
+								ECRIRE "                                       , ""`--.                          		"
+								ECRIRE "                                      |     __ `-.                       		"
+								ECRIRE "                                      |    /  `.  `.                     		"
+								ECRIRE "                                       \        ,   `.                   		"
+								ECRIRE "                                        `.      \_    `.                 		"
+								ECRIRE "                                          `.    | `.    \                		"
+								ECRIRE "                                            `--"    `.   `               		"
+								ECRIRE "                                                      `.  `              		"
+								ECRIRE "                  ,.._                                  \  `             		"
+								ECRIRE "                /_,.  `.                                 \  `            		"
+								ECRIRE "               j/   .   \                  ___            \  \           		"
+								ECRIRE "               |    |   `____         _,--    `.           .  L          		"
+								ECRIRE "                L  /`--"     ` --._ ,    ,-` \ |            . |          		"
+								ECRIRE "                 |-                 /  ,      ||            | |          		"
+								ECRIRE "      -v._      /                   ,         ||            | |          		"
+								ECRIRE "        `.`-._,                _     \        |j    _,...   | |          		"
+								ECRIRE "          `,.              _,-. \     |      /,---""     `- | |          		"
+								ECRIRE "         .               ,".   ||     `..___/,             `  |          		"
+								ECRIRE "         |   ,         _/`-   /,                             `|          		"
+								ECRIRE "         |-.__.- "  ""  """"""""--`_,...-----    --...--      `.         		"
+								ECRIRE "          `.____,..              ""   __,..---"""              |         		"
+								ECRIRE "           |       `              --" .                        `         		"
+								ECRIRE "           |     ,  `._                \                        `        		"
+								ECRIRE "           | |  .^.    `.             /                          `.      		"
+								ECRIRE "          , _]__|  \   / `.          /          /____._            `._   		"
+								ECRIRE "        ,           \ j             /          /       `.             `. 		"
+								ECRIRE "  ___,.  `._       __L/    |     __           /     _, / \             | 		"
+								ECRIRE "  -._       L,.-"""  .    ,  _.- ,           /----- -./   `--.         | 		"
+								ECRIRE "        / ,           .. "_,     /         F /  ." _,         |.__     | 		"
+								ECRIRE "   / ,.\,               ""      /         / (, \ .         ,.-"   `.  j  		"
+								ECRIRE "   -                           /        ,      `"         / __/  .- ,    		"
+								ECRIRE "                            __. "`.    /                 `-  | _,L,      		"
+								ECRIRE "                          . ,      `""                        /,--       		"
+								ECRIRE "                           / _..  _,,                                    		"
+								ECRIRE "                           ,  `-"                                        		"
+
+			CAS "Pikachu"	:
+								ECRIRE "                                               ,-.                              "
+								ECRIRE "                                            _.|  /                              "
+								ECRIRE "                                          .   | /                               "
+								ECRIRE "                                        ,     |/                                "
+								ECRIRE "                                       /      /                                 "
+								ECRIRE "                         _..----""---.       /                                  "
+								ECRIRE "   _.....---------...,-""                  ,                                    "
+								ECRIRE "   `-._  \                                /                                     "
+								ECRIRE "       `-.+_            __           ,--. .                                     "
+								ECRIRE "            `-.._     .:  ).        (`--"| \                                    "
+								ECRIRE "                 7    | `" |         `...   \                                   "
+								ECRIRE "                 |     `--       +"        ,". ,""-                             "
+								ECRIRE "                 |   _...        .____     | |/    \                            "
+								ECRIRE "            _.   |  .    `.   --"   /      `./     j                            "
+								ECRIRE "           \  `-.|        |   `.   /        /     /                             "
+								ECRIRE "                 `-. `---"      `-"        /     /                              "
+								ECRIRE "            \       `.                  _,      /                               "
+								ECRIRE "             \        `                        .                                "
+								ECRIRE "              \                                j                                "
+								ECRIRE "               \                              /                                 "
+								ECRIRE "                `.                           .                                  "
+								ECRIRE "                  +                          \                                  "
+								ECRIRE "                  |                           L                                 "
+								ECRIRE "                  |                           |                                 "
+								ECRIRE "                  |  _ /,                     |                                 "
+								ECRIRE "                  | | L) ..                   |                                 "
+								ECRIRE "                  | .    | `                  |                                 "
+								ECRIRE "                     \    L                                                     "
+								ECRIRE "                   \  \   |                  j                                  "
+								ECRIRE "                    `. `__                  /                                   "
+								ECRIRE "                  _,.--.---........__      /                                    "
+								ECRIRE "                 ---., ---`         |   -j"                                     "
+								ECRIRE "                  .-    ....__      L    |                                      "
+								ECRIRE "                ""--..    _,-        \ l||                                      "
+								ECRIRE "                    ,-   .....------. `||                                       "
+								ECRIRE "                 _,                 /                                           "
+								ECRIRE "               ,                   /                                            "
+								ECRIRE "               ---------+-        /                                             "
+								ECRIRE "                       /         /                                              "
+								ECRIRE "                     .          /                                               "
+								ECRIRE "                   .           /                                                "
+								ECRIRE "                 ,            /                                                 "
+								ECRIRE "               _/....----"""""                                                  "
+
+			CAS "Machoc"	:
+								ECRIRE "                             ,."--.                                             "
+								ECRIRE "                        _.../     _\""-.                                        "
+								ECRIRE "                      //  ,     ,"      :                                       "
+								ECRIRE "                     .   /   .:       __|                                       "
+								ECRIRE "                     || ||  /,    _."    .                                      "
+								ECRIRE "                     || ||  ||  ,         `.                                    "
+								ECRIRE "                    /|| ||  ||,             .                                   "
+								ECRIRE "                   /.`| /` /`,   __                                             "
+								ECRIRE "                  j /. " `"    ,  /`.        |                                  "
+								ECRIRE "                  ||.|        .  | . .      _|,--._                             "
+								ECRIRE "                  ||#|        |  | # |   ,-"       `-.                          "
+								ECRIRE "                 / .||        |  \." |  /             `                         "
+								ECRIRE "                /             `.----"   |`.|           |                        "
+								ECRIRE "                \  `.    ,              `  \           |                        "
+								ECRIRE "                 `._____           _,-   `._,..        |                        "
+								ECRIRE "                   `".  ` -..__..-    _,.-- .  .       |                        "
+								ECRIRE "                    ,-^-._      _,..-        `.|       |                        "
+								ECRIRE "                _,-      | "" ""              `|  `\    \                       "
+								ECRIRE "            _.-          |            `.,--    |    \    \                      "
+								ECRIRE "       _,."" "" -._             `.     .      j           \                     "
+								ECRIRE "      /            `.___/.-"    ._`-._  \.    |      |     L                    "
+								ECRIRE "     /  ____           /,.-     . `._  ""|`.  `      |     |                    "
+								ECRIRE "      `.    `"-.      / _,-"     `._ `" ".  `. \                                "
+								ECRIRE "        \       `-   ."             "`--- \   ` `-._/     /                     "
+								ECRIRE "         `-------.   |                     \   `-._      /                      "
+								ECRIRE "                  \ j                      .       `...,                        "
+								ECRIRE "                   `|                       \                                   "
+								ECRIRE "                                             \                                  "
+								ECRIRE "                     .                      / \                                 "
+								ECRIRE "                     |`.                   /   `._                              "
+								ECRIRE "                     |    `.._____        /|      `-._                          "
+								ECRIRE "                     |        |   Y.       |.         `.                        "
+								ECRIRE "                     |       j     \        .`"--....-                          "
+								ECRIRE "                  _,-        |      |        \                                  "
+								ECRIRE "               .-            |     ,          `.                                "
+								ECRIRE "                             |     |            `.                              "
+								ECRIRE "              `.        __,..       .             \                             "
+								ECRIRE "                `-.---"              `-..__      _/                             "
+								ECRIRE "                                           ` """                                "
+
+			CAS "Racaillou"	:
+								ECRIRE "                                               _,.---.                          "
+								ECRIRE "                                           _,-        `.                        "
+								ECRIRE "                                        _,   ,          \                       "
+								ECRIRE "                                      ,   _,    .        `.                     "
+								ECRIRE "                                     /  ,      ,           `.                   "
+								ECRIRE "            __                       .,     _,               `.                 "
+								ECRIRE "       _,..   `-....___              :    ,                    \                "
+								ECRIRE "     ,    /            :             /`.,       /               `               "
+								ECRIRE "    /    /  ._         |         __..|  `.    .        ,         `.             "
+								ECRIRE "    |   |   , "--._    |      ,-     `-._`.,-        ,:            .            "
+								ECRIRE "   . \   \     _, .    ` ___.            `"`.     _,  /            |            "
+								ECRIRE "   |  \   \---        ,"   .-"" "----.       `.     ,              |            "
+								ECRIRE "    `. `-.           /    /                    `-..^._             |            "
+								ECRIRE "      |._|    _.    /    /                            `._           .           "
+								ECRIRE "      `...:-- --+..    ,                               /            |           "
+								ECRIRE "           ._  `|   ,-        _..._                   j     \       |           "
+								ECRIRE "            |` |   /       ,-      `-.__              |      L      |           "
+								ECRIRE "            |  |  /      ,                            |      |      |           "
+								ECRIRE "            |_,         /         _,-                  .     |      |           "
+								ECRIRE "           ,   ,   |  ,         ,|            ,..._     \    |      |           "
+								ECRIRE "          ,     \ j          _." |           /     `-.__          ,             "
+								ECRIRE "           +._    |       , |    |          /        ,     .     /              "
+								ECRIRE "           |  `._  `-  .:|  |     .       -                     j               "
+								ECRIRE "                |`      |   |     |                             |               "
+								ECRIRE "            `.  |       |--      _|        .                    |               "
+								ECRIRE "              \ |        ---- """           \      __,....-+----                "
+								ECRIRE "              |                              `---""      .                      "
+								ECRIRE "              `. `.                                     ,                       "
+								ECRIRE "                `" \_...-""" --..         _+          ,                         "
+								ECRIRE "                                  -.   `-   `.  ."-..                           "
+								ECRIRE "                      `-..._            _____,.                                 "
+								ECRIRE "                            `--.....,-"                                         "
+
+			CAS "Magicarpe"	:
+								ECRIRE "                                    __.--.._,- ""-.                             "
+								ECRIRE "                                 ,-  .  ,   .-"  -.`.       .--.                "
+								ECRIRE "                               ,     |  |   `-.    \ \       `-.|               "
+								ECRIRE "                              /       .   /    `.   \ \        ||               "
+								ECRIRE "                             /         `..`.    `.   \ .       ||               "
+								ECRIRE "                            /        . .    `.    \   . .       .               "
+								ECRIRE "                   ."-.    .  ,"" -. | |      \    \   `.`.__, .                "
+								ECRIRE "                    `. `. .   |     `. |       \    .    `-..-                  "
+								ECRIRE "          _______     .  `|   |       .         .   |...--._                    "
+								ECRIRE "          `.     `"--.         .      | .        .  |""  "-._"-._               "
+								ECRIRE "            `.             \    `-._.. . .       |  |---.._  `-.__"-..          "
+								ECRIRE "       -.     `.           |\           `.`      |  | `-.  `-._   +"-           "
+								ECRIRE "       `.`.     `-.        | `            .`.       | `. `.    `,"              "
+								ECRIRE "         `.`.      `.      |   .           ` `      `.  \  `   /                "
+								ECRIRE "         | `.`.    __`.    |`/  `.     ...  `.`.     |   `.   .                 "
+								ECRIRE "         |   \ .  `._      | `. / `. . .  |   \ \    |     \  |                 "
+								ECRIRE "         |.   ` \    `-.   |   \   . . /  |    \ \   |      ._                  "
+								ECRIRE "         | `.  `.\      `. |    \ / ,  .  |_    . \   -.                        "
+								ECRIRE "        ,     .  .\       `|     .   / |  | `-...\ \    `._                     "
+								ECRIRE "        `.     `.  \       |.     / .  |  |         .      `-.                  "
+								ECRIRE "         .`._    \` \      | `. /      |  |       | |       ,.                  "
+								ECRIRE "          .  `-.  \`.\    ,|   //      |  |__  .  | |      |                    "
+								ECRIRE "          |     `._`| `--  `  //  .    |     `"  /| |   . -                     "
+								ECRIRE "                   `|       `//        |   .    / | |   |                       "
+								ECRIRE "         /....._____|       //   .  ___|   |   /  | |  ,|                       "
+								ECRIRE "        .         _.       /, _.--" -._ `".| ,    | |.                          "
+								ECRIRE "        |      _,  / ___   `- .        `. _|      |,                            "
+								ECRIRE "        |  _,-"  , .    `-.._  `.      _,          `                            "
+								ECRIRE "         -"   _, ,           "- ....--                                          "
+								ECRIRE "       /  _.-"_.                                                                "
+								ECRIRE "      /_, _,-                                                                   "
+								ECRIRE "    . _.-                                                                       "
+								ECRIRE "     "                                                                          "
+		FINCASPARMI
+FIN
+
+
+ rocedure affiche_ennemi
+//BUT Afficher les pokémons ennemis.
+//ENTREE rien
+//SORTIE l affichage du pokémon
+
+DEBUT
+	
+		CAS nom_ennemi PARMIS
+
+			CAS "Salameche" : 
+								ECRIRE "                      _.--""`-.                                                 "
+								ECRIRE "                    ,           `.                                              "
+								ECRIRE "                  ,           __   .                                            "
+								ECRIRE "                 /|          " __   \                                           "
+								ECRIRE "                , |           / |.   .                                          "
+								ECRIRE "                |,           !_. |   |                                          "
+								ECRIRE "              ,                  |   |                                          "
+								ECRIRE "             /              |`-- |   |                                          "
+								ECRIRE "            |                `---    |                                          "
+								ECRIRE "             .   ,                   |                       ,".                "
+								ECRIRE "              ._                 _   |                    ,   \ `               "
+								ECRIRE "          `.. `.`-...___,...---""    |       __,.        ,`"   L,|              "
+								ECRIRE "          |, `- .`._        _,-,.    .  __.- -. /        .   ,    \             "
+								ECRIRE "        -:..     `. `-..--_.,.<       `"      / `.        `-/ |   .             "
+								ECRIRE "          `,         """"      `.              ,          |   |   ,,            "
+								ECRIRE "            `.                                /               | . |/            "
+								ECRIRE "              `.   |              \       _,-            |                      "
+								ECRIRE "                `._                \    "\                .      |              "
+								ECRIRE "                   |                      \                `._  ,               "
+								ECRIRE "                   |                       \                 . |                "
+								ECRIRE "                   |                 .      \                | |                "
+								ECRIRE "                   |                 |       L              ,  |                "
+								ECRIRE "                   `                 |       |             /                    "
+								ECRIRE "                    \                |       |           ,    /                 "
+								ECRIRE "                  ,  \               |  _.._ ,-..___,..-     ,                  "
+								ECRIRE "                 /     .             .      `!             ,j                   "
+								ECRIRE "                /       `.          /        .           . /                    "
+								ECRIRE "               .          `.       /         |        _. .                      "
+								ECRIRE "                `.          7` ---           |------" _.                        "
+								ECRIRE "               _,.`,_     _                 ,  -----"                           "
+								ECRIRE "           _,-_            `.     .       ,\                                    "
+								ECRIRE "           -" /`.         _,      | _  _  _.|                                   "
+								ECRIRE "            ""-- ---"""""         `   ! |! /                                    "
+								ECRIRE "                                    `" "                                        "
+			
+			CAS "Carapuce"	:
+								ECRIRE "                _,........__                                                    "
+								ECRIRE "             ,-             "`-.                                                "
+								ECRIRE "           ,                    `-.                                             "
+								ECRIRE "         ,                         \                                            "
+								ECRIRE "       ,                            .                                           "
+								ECRIRE "       . \               ,"".       `                                           "
+								ECRIRE "      ._. |             / |  `       \                                          "
+								ECRIRE "      |   |            `-.   ||       `.                                        "
+								ECRIRE "      |   |             -._, ||       | \                                       "
+								ECRIRE "      .`.,              `.., .        , |`-.                                    "
+								ECRIRE "      l                       . `.  _/  |   `.                                  "
+								ECRIRE "      `-.._ -   ,          _ _    -" \  .     `                                 "
+								ECRIRE " `.""""" -.`-...,--------- ,          `. `....__.                               "
+								ECRIRE " .         `"-..___      __, \          \  \     \                              "
+								ECRIRE " \_ .          |   `""""     `.           . \     \                             "
+								ECRIRE "   `.          |              `.          |  .     L                            "
+								ECRIRE "     `.        |`--...________. .        j   |     |                            "
+								ECRIRE "       `._    .       |          `.     .|   ,     |                            "
+								ECRIRE "          `--,\       .            `7""  |  ,      |                            "
+								ECRIRE "             ` `      `            /     |  |      |    _,- """`-.              "
+								ECRIRE "              \ `.     .          /      |         |  ,           `.            "
+								ECRIRE "               \  v.__  .                .   \    /| /              \           "
+								ECRIRE "                \/    `""\"""""""`.       \   \  /.                  |          "
+								ECRIRE "                 `        .        `._ ___,j.  `/ .-       ,---.     |          "
+								ECRIRE "                 ,`-.      \         ."     `.  |/        j     `    |          "
+								ECRIRE "                /    `.     \       /         \ /         |     /    j          "
+								ECRIRE "               |       `-.   7-.._ .          |"                    /           "
+								ECRIRE "               |          `./_    `|          |            .     _,             "
+								ECRIRE "               `.           / `----|          |-............`---                "
+								ECRIRE "                 \          \      |          |                                 "
+								ECRIRE "                ,            )     `.         |                                 "
+								ECRIRE "                 7____,,..--       /          |                                 "
+								ECRIRE "                                   `---.__,--.                                  "
+			
+			CAS "Bulbizarre":
+								ECRIRE "                                               /                         		"
+								ECRIRE "                            _,.------....___,.   ,.-.                    		"
+								ECRIRE "                         ,-           _,.--"        |                    		"
+								ECRIRE "                       ,          _.-               .                    		"
+								ECRIRE "                      /   ,     ,                    `                   		"
+								ECRIRE "                     .   /     /                     ``.                 		"
+								ECRIRE "                     |  |     .                       \.\                		"
+								ECRIRE "           ____      |___._.  |       __               \ `.              		"
+								ECRIRE "         .     `---""       ``"-.--" `  \               .  \             		"
+								ECRIRE "        .  ,            __               `              |   .            		"
+								ECRIRE "        `,          ,-"   .               \             |    L           		"
+								ECRIRE "       ,                _.                 -._          /    |           		"
+								ECRIRE "      ,`-.    ,".   `--                       >.      ,      |           		"
+								ECRIRE "     . . \    `-        __    ,  ,-.         /  `.__.-      ,            		"
+								ECRIRE "     ||:, .           ,      /  / \ `        `.    .      . /            		"
+								ECRIRE "     j|:D  \          `--     , _  . .         `.__, \   , /             		"
+								ECRIRE "    / L:_  |                 .  "  :_                 `. .               		"
+								ECRIRE "    .    ""                   """""                     V                		"
+								ECRIRE "     `.                                 .    `.   _,..  `                		"
+								ECRIRE "       `,_   .    .                _,- /    .. `,    __  `               		"
+								ECRIRE "        ) \`._        ___....----"   ,    .   \ |      \  .              		"
+								ECRIRE "       /   `. "`-.--"          _,  ,      `---  |    `./  |              		"
+								ECRIRE "      .   _  `"" --.._____..--"   ,                       |              		"
+								ECRIRE "      | ." `. `-.                /-.           /          ,              		"
+								ECRIRE "      | `._.     `,_               /         ,           .               		"
+								ECRIRE "     .           /| `-.        . ,          ,           ,                		"
+								ECRIRE "      -.__ __ _, ,      `-..___ -...__   ,. \ ____.___.                  		"
+								ECRIRE "     `"^-- ..     -`-^- "--    `-^- `.  """""`.,^.`.--                   		"
+
+			CAS "Roucool"	:
+								ECRIRE "                      .,                                                 		"
+								ECRIRE "               , _.- ,                                                   		"
+								ECRIRE "             ""|"    `"""".,                                             		"
+								ECRIRE "            / /       __.- -"/                                           		"
+								ECRIRE "            ,   _,--""       -._                                         		"
+								ECRIRE "       _...`... ."""""".\""-----                                         		"
+								ECRIRE "    ,-           `-.) /  `.  \                                           		"
+								ECRIRE "   +---."-.    |     `.    .  \                                          		"
+								ECRIRE "        \  `.  |       \   |   L                                         		"
+								ECRIRE "         `v  ,-j        , .    |                                         		"
+								ECRIRE "        . \,  /        /,       -._                                      		"
+								ECRIRE "       ,____.         .            `-.                                   		"
+								ECRIRE "           |         /                `-.                                		"
+								ECRIRE "          /          `.                  `-.                             		"
+								ECRIRE "         /             `. |                 `.                  _.       		"
+								ECRIRE "        .                `|                 ,-.             _.-" .       		"
+								ECRIRE "       j                  |                 |  \         _.     /        		"
+								ECRIRE "       .                  |               .     \     ,-       /         		"
+								ECRIRE "       |                  |            ,-.\      \  ,       _.-          		"
+								ECRIRE "       |                .    `.       |   `      `v   _,.-"/             		"
+								ECRIRE "       ||    \          |  ` |(` -`.,.j         \ `.- ----+---.          		"
+								ECRIRE "       | |   |L    \  | |   `|   \               L \___      /           		"
+								ECRIRE "         L   |`     L | |     `.                 | j   `"""-             		"
+								ECRIRE "          `- ||\    | ||j       `.       ._    `  .                      		"
+								ECRIRE "             `\  "`^"-            `.       \    |/|                      		"
+								ECRIRE "               `._                  `-.     \   Y |                      		"
+								ECRIRE "       __,..-""`..`._                  `-._  `\ `.|                      		"
+								ECRIRE "      +.....>+----.  ""----.........,--""" `--. .                        		"
+								ECRIRE "          ,  _\  ,..--.-"  __>---   |                                    		"
+								ECRIRE "         --""  "   _." }<""          `---""`._                           		"
+								ECRIRE "                  /..."  L__.+--   _,...... ..                           		"
+								ECRIRE "                    /.-"" /   \ ,-                                       		"
+								ECRIRE "                        .  ,-""                                          		"
+								ECRIRE "                       /.-                                               		"
+
+			CAS "Ratata"	:
+								ECRIRE "                                       , ""`--.                          		"
+								ECRIRE "                                      |     __ `-.                       		"
+								ECRIRE "                                      |    /  `.  `.                     		"
+								ECRIRE "                                       \        ,   `.                   		"
+								ECRIRE "                                        `.      \_    `.                 		"
+								ECRIRE "                                          `.    | `.    \                		"
+								ECRIRE "                                            `--"    `.   `               		"
+								ECRIRE "                                                      `.  `              		"
+								ECRIRE "                  ,.._                                  \  `             		"
+								ECRIRE "                /_,.  `.                                 \  `            		"
+								ECRIRE "               j/   .   \                  ___            \  \           		"
+								ECRIRE "               |    |   `____         _,--    `.           .  L          		"
+								ECRIRE "                L  /`--"     ` --._ ,    ,-` \ |            . |          		"
+								ECRIRE "                 |-                 /  ,      ||            | |          		"
+								ECRIRE "      -v._      /                   ,         ||            | |          		"
+								ECRIRE "        `.`-._,                _     \        |j    _,...   | |          		"
+								ECRIRE "          `,.              _,-. \     |      /,---""     `- | |          		"
+								ECRIRE "         .               ,".   ||     `..___/,             `  |          		"
+								ECRIRE "         |   ,         _/`-   /,                             `|          		"
+								ECRIRE "         |-.__.- "  ""  """"""""--`_,...-----    --...--      `.         		"
+								ECRIRE "          `.____,..              ""   __,..---"""              |         		"
+								ECRIRE "           |       `              --" .                        `         		"
+								ECRIRE "           |     ,  `._                \                        `        		"
+								ECRIRE "           | |  .^.    `.             /                          `.      		"
+								ECRIRE "          , _]__|  \   / `.          /          /____._            `._   		"
+								ECRIRE "        ,           \ j             /          /       `.             `. 		"
+								ECRIRE "  ___,.  `._       __L/    |     __           /     _, / \             | 		"
+								ECRIRE "  -._       L,.-"""  .    ,  _.- ,           /----- -./   `--.         | 		"
+								ECRIRE "        / ,           .. "_,     /         F /  ." _,         |.__     | 		"
+								ECRIRE "   / ,.\,               ""      /         / (, \ .         ,.-"   `.  j  		"
+								ECRIRE "   -                           /        ,      `"         / __/  .- ,    		"
+								ECRIRE "                            __. "`.    /                 `-  | _,L,      		"
+								ECRIRE "                          . ,      `""                        /,--       		"
+								ECRIRE "                           / _..  _,,                                    		"
+								ECRIRE "                           ,  `-"                                        		"
+
+			CAS "Pikachu"	:
+								ECRIRE "                                               ,-.                              "
+								ECRIRE "                                            _.|  /                              "
+								ECRIRE "                                          .   | /                               "
+								ECRIRE "                                        ,     |/                                "
+								ECRIRE "                                       /      /                                 "
+								ECRIRE "                         _..----""---.       /                                  "
+								ECRIRE "   _.....---------...,-""                  ,                                    "
+								ECRIRE "   `-._  \                                /                                     "
+								ECRIRE "       `-.+_            __           ,--. .                                     "
+								ECRIRE "            `-.._     .:  ).        (`--"| \                                    "
+								ECRIRE "                 7    | `" |         `...   \                                   "
+								ECRIRE "                 |     `--       +"        ,". ,""-                             "
+								ECRIRE "                 |   _...        .____     | |/    \                            "
+								ECRIRE "            _.   |  .    `.   --"   /      `./     j                            "
+								ECRIRE "           \  `-.|        |   `.   /        /     /                             "
+								ECRIRE "                 `-. `---"      `-"        /     /                              "
+								ECRIRE "            \       `.                  _,      /                               "
+								ECRIRE "             \        `                        .                                "
+								ECRIRE "              \                                j                                "
+								ECRIRE "               \                              /                                 "
+								ECRIRE "                `.                           .                                  "
+								ECRIRE "                  +                          \                                  "
+								ECRIRE "                  |                           L                                 "
+								ECRIRE "                  |                           |                                 "
+								ECRIRE "                  |  _ /,                     |                                 "
+								ECRIRE "                  | | L) ..                   |                                 "
+								ECRIRE "                  | .    | `                  |                                 "
+								ECRIRE "                     \    L                                                     "
+								ECRIRE "                   \  \   |                  j                                  "
+								ECRIRE "                    `. `__                  /                                   "
+								ECRIRE "                  _,.--.---........__      /                                    "
+								ECRIRE "                 ---., ---`         |   -j"                                     "
+								ECRIRE "                  .-    ....__      L    |                                      "
+								ECRIRE "                ""--..    _,-        \ l||                                      "
+								ECRIRE "                    ,-   .....------. `||                                       "
+								ECRIRE "                 _,                 /                                           "
+								ECRIRE "               ,                   /                                            "
+								ECRIRE "               ---------+-        /                                             "
+								ECRIRE "                       /         /                                              "
+								ECRIRE "                     .          /                                               "
+								ECRIRE "                   .           /                                                "
+								ECRIRE "                 ,            /                                                 "
+								ECRIRE "               _/....----"""""                                                  "
+
+			CAS "Machoc"	:
+								ECRIRE "                             ,."--.                                             "
+								ECRIRE "                        _.../     _\""-.                                        "
+								ECRIRE "                      //  ,     ,"      :                                       "
+								ECRIRE "                     .   /   .:       __|                                       "
+								ECRIRE "                     || ||  /,    _."    .                                      "
+								ECRIRE "                     || ||  ||  ,         `.                                    "
+								ECRIRE "                    /|| ||  ||,             .                                   "
+								ECRIRE "                   /.`| /` /`,   __                                             "
+								ECRIRE "                  j /. " `"    ,  /`.        |                                  "
+								ECRIRE "                  ||.|        .  | . .      _|,--._                             "
+								ECRIRE "                  ||#|        |  | # |   ,-"       `-.                          "
+								ECRIRE "                 / .||        |  \." |  /             `                         "
+								ECRIRE "                /             `.----"   |`.|           |                        "
+								ECRIRE "                \  `.    ,              `  \           |                        "
+								ECRIRE "                 `._____           _,-   `._,..        |                        "
+								ECRIRE "                   `".  ` -..__..-    _,.-- .  .       |                        "
+								ECRIRE "                    ,-^-._      _,..-        `.|       |                        "
+								ECRIRE "                _,-      | "" ""              `|  `\    \                       "
+								ECRIRE "            _.-          |            `.,--    |    \    \                      "
+								ECRIRE "       _,."" "" -._             `.     .      j           \                     "
+								ECRIRE "      /            `.___/.-"    ._`-._  \.    |      |     L                    "
+								ECRIRE "     /  ____           /,.-     . `._  ""|`.  `      |     |                    "
+								ECRIRE "      `.    `"-.      / _,-"     `._ `" ".  `. \                                "
+								ECRIRE "        \       `-   ."             "`--- \   ` `-._/     /                     "
+								ECRIRE "         `-------.   |                     \   `-._      /                      "
+								ECRIRE "                  \ j                      .       `...,                        "
+								ECRIRE "                   `|                       \                                   "
+								ECRIRE "                                             \                                  "
+								ECRIRE "                     .                      / \                                 "
+								ECRIRE "                     |`.                   /   `._                              "
+								ECRIRE "                     |    `.._____        /|      `-._                          "
+								ECRIRE "                     |        |   Y.       |.         `.                        "
+								ECRIRE "                     |       j     \        .`"--....-                          "
+								ECRIRE "                  _,-        |      |        \                                  "
+								ECRIRE "               .-            |     ,          `.                                "
+								ECRIRE "                             |     |            `.                              "
+								ECRIRE "              `.        __,..       .             \                             "
+								ECRIRE "                `-.---"              `-..__      _/                             "
+								ECRIRE "                                           ` """                                "
+
+			CAS "Racaillou"	:
+								ECRIRE "                                               _,.---.                          "
+								ECRIRE "                                           _,-        `.                        "
+								ECRIRE "                                        _,   ,          \                       "
+								ECRIRE "                                      ,   _,    .        `.                     "
+								ECRIRE "                                     /  ,      ,           `.                   "
+								ECRIRE "            __                       .,     _,               `.                 "
+								ECRIRE "       _,..   `-....___              :    ,                    \                "
+								ECRIRE "     ,    /            :             /`.,       /               `               "
+								ECRIRE "    /    /  ._         |         __..|  `.    .        ,         `.             "
+								ECRIRE "    |   |   , "--._    |      ,-     `-._`.,-        ,:            .            "
+								ECRIRE "   . \   \     _, .    ` ___.            `"`.     _,  /            |            "
+								ECRIRE "   |  \   \---        ,"   .-"" "----.       `.     ,              |            "
+								ECRIRE "    `. `-.           /    /                    `-..^._             |            "
+								ECRIRE "      |._|    _.    /    /                            `._           .           "
+								ECRIRE "      `...:-- --+..    ,                               /            |           "
+								ECRIRE "           ._  `|   ,-        _..._                   j     \       |           "
+								ECRIRE "            |` |   /       ,-      `-.__              |      L      |           "
+								ECRIRE "            |  |  /      ,                            |      |      |           "
+								ECRIRE "            |_,         /         _,-                  .     |      |           "
+								ECRIRE "           ,   ,   |  ,         ,|            ,..._     \    |      |           "
+								ECRIRE "          ,     \ j          _." |           /     `-.__          ,             "
+								ECRIRE "           +._    |       , |    |          /        ,     .     /              "
+								ECRIRE "           |  `._  `-  .:|  |     .       -                     j               "
+								ECRIRE "                |`      |   |     |                             |               "
+								ECRIRE "            `.  |       |--      _|        .                    |               "
+								ECRIRE "              \ |        ---- """           \      __,....-+----                "
+								ECRIRE "              |                              `---""      .                      "
+								ECRIRE "              `. `.                                     ,                       "
+								ECRIRE "                `" \_...-""" --..         _+          ,                         "
+								ECRIRE "                                  -.   `-   `.  ."-..                           "
+								ECRIRE "                      `-..._            _____,.                                 "
+								ECRIRE "                            `--.....,-"                                         "
+
+			CAS "Magicarpe"	:
+								ECRIRE "                                    __.--.._,- ""-.                             "
+								ECRIRE "                                 ,-  .  ,   .-"  -.`.       .--.                "
+								ECRIRE "                               ,     |  |   `-.    \ \       `-.|               "
+								ECRIRE "                              /       .   /    `.   \ \        ||               "
+								ECRIRE "                             /         `..`.    `.   \ .       ||               "
+								ECRIRE "                            /        . .    `.    \   . .       .               "
+								ECRIRE "                   ."-.    .  ,"" -. | |      \    \   `.`.__, .                "
+								ECRIRE "                    `. `. .   |     `. |       \    .    `-..-                  "
+								ECRIRE "          _______     .  `|   |       .         .   |...--._                    "
+								ECRIRE "          `.     `"--.         .      | .        .  |""  "-._"-._               "
+								ECRIRE "            `.             \    `-._.. . .       |  |---.._  `-.__"-..          "
+								ECRIRE "       -.     `.           |\           `.`      |  | `-.  `-._   +"-           "
+								ECRIRE "       `.`.     `-.        | `            .`.       | `. `.    `,"              "
+								ECRIRE "         `.`.      `.      |   .           ` `      `.  \  `   /                "
+								ECRIRE "         | `.`.    __`.    |`/  `.     ...  `.`.     |   `.   .                 "
+								ECRIRE "         |   \ .  `._      | `. / `. . .  |   \ \    |     \  |                 "
+								ECRIRE "         |.   ` \    `-.   |   \   . . /  |    \ \   |      ._                  "
+								ECRIRE "         | `.  `.\      `. |    \ / ,  .  |_    . \   -.                        "
+								ECRIRE "        ,     .  .\       `|     .   / |  | `-...\ \    `._                     "
+								ECRIRE "        `.     `.  \       |.     / .  |  |         .      `-.                  "
+								ECRIRE "         .`._    \` \      | `. /      |  |       | |       ,.                  "
+								ECRIRE "          .  `-.  \`.\    ,|   //      |  |__  .  | |      |                    "
+								ECRIRE "          |     `._`| `--  `  //  .    |     `"  /| |   . -                     "
+								ECRIRE "                   `|       `//        |   .    / | |   |                       "
+								ECRIRE "         /....._____|       //   .  ___|   |   /  | |  ,|                       "
+								ECRIRE "        .         _.       /, _.--" -._ `".| ,    | |.                          "
+								ECRIRE "        |      _,  / ___   `- .        `. _|      |,                            "
+								ECRIRE "        |  _,-"  , .    `-.._  `.      _,          `                            "
+								ECRIRE "         -"   _, ,           "- ....--                                          "
+								ECRIRE "       /  _.-"_.                                                                "
+								ECRIRE "      /_, _,-                                                                   "
+								ECRIRE "    . _.-                                                                       "
+								ECRIRE "     "                                                                          "
+
+			CAS "Pascal"	:
+								ECRIRE "               ________________________________________________                 "
+								ECRIRE "              /                                                \                "
+								ECRIRE "             |    _________________________________________     |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |  C:\> _                                 |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |                                         |    |               "
+								ECRIRE "             |   |_________________________________________|    |               "
+								ECRIRE "             |                                                  |               "
+								ECRIRE "              \_________________________________________________/               "
+								ECRIRE "                     \___________________________________/                      "
+								ECRIRE "                  ___________________________________________                   "
+								ECRIRE "               _-     .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.  --- `-_                "
+								ECRIRE "            _- .-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.  .-.-.`-_             "
+								ECRIRE "         _- .-.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-`__`. .-.-.-.`-_          "
+								ECRIRE "      _- .-.-.-.-. .-----.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-----. .-.-.-.-.`-_       "
+								ECRIRE "   _- .-.-.-.-.-. .---.-. .-------------------------. .-.---. .---.-.-.-.`-_    "
+								ECRIRE "  :-------------------------------------------------------------------------:   "
+								ECRIRE "  `---._.-------------------------------------------------------------._.---    "			
+
+
+
+
+
+procedure changement_allie
+//BUT gérer le changement de pokémons
+//ENTREE le numéro du pokémon voulu
+//SORTIE le pokémon voulu devient le pokémon jouable
+
+
+var touche_changement, pv_tempo, pv_max_tempo, xp_tempo, xp_max_tempo, lvl_tempo, atq_tempo: ENTIER
+	nom_tempo, type_tempo                    : CHAINE
+	change                                   : BOOLEEN
+
+DEBUT
+	change <-- faux
+	TANTQUE change = faux FAIRE
+		LIRE touche_changement
+		CAS touche_changement PARMI
+
+				2:	SI pv_allie2 > 0 ALORS
+						pv_tempo <--pv_allie
+						nom_tempo <-- nom_allie
+						pv_max_tempo <-- pv_allie_max
+						type_tempo <-- type_allie
+						xp_tempo <-- xp_allie
+						xp_max_tempo <-- xp_max_allie
+						lvl_tempo <-- lvl_allie
+						atq_tempo <-- atq_allie
+
+						pv_allie <--pv_allie2
+						nom_allie <-- nom_allie2
+						pv_allie_max <-- pv_allie2_max
+						type_allie <-- type_allie2
+						xp_allie <-- xp_allie2
+						xp_max_allie <-- xp_max_allie2
+						lvl_allie <-- lvl_allie2
+						atq_allie <-- atq_allie2
+
+						pv_allie2 <--pv_tempo
+						nom_allie2 <-- nom_tempo
+						pv_allie2_max <-- pv_max_tempo
+						type_allie2 <-- type_tempo
+						xp_allie2 <-- xp_tempo
+						xp_max_allie2 <-- xp_max__tempo
+						lvl_allie2 <-- lvl_tempo
+						atq_allie2 <-- atq_tempo
+
+						change <-- vrai
+
+					SINON
+						SI nom_allie2 <> "" ALORS
+							ECRIRE nom_allie2 + " est KO"
+							ECRIRE "Veuillez choisir un autre pokémon"
+						SINON
+							ECRIRE "Vous n'avez pas de pokemon a cet emplacement"
+							ECRIRE "Veuillez choisir un autre pokémon"
+						FINSI
+					FINSI
+				3:	SI pv_allie3 > 0
+						pv_tempo <--pv_allie
+						nom_tempo <-- nom_allie
+						pv_max_tempo <-- pv_allie_max
+						type_tempo <-- type_allie
+						xp_tempo <-- xp_allie
+						xp_max_tempo <-- xp_max_allie
+						lvl_tempo <-- lvl_allie
+						atq_tempo <-- atq_allie
+
+						pv_allie <--pv_allie3
+						nom_allie <-- nom_allie3
+						pv_allie_max <-- pv_allie3_max
+						type_allie <-- type_allie3
+						xp_allie <-- xp_allie3
+						xp_max_allie <-- xp_max_allie3
+						lvl_allie <-- lvl_allie3
+						atq_allie <-- atq_allie3
+
+						pv_allie3 <-- pv_tempo
+						nom_allie3 <-- nom_tempo
+						pv_allie3_max <-- pv_max_tempo
+						type_allie3 <-- type_tempo
+						xp_allie3 <-- xp_tempo
+						xp_max_allie3 <-- xp_max_tempo
+						lvl_allie3 <-- lvl_tempo
+						atq_allie3 <-- atq_tempo
+
+
+						change <-- vrai
+					SINON
+						SI nom_allie3 <> "" ALORS
+							ECRIRE nom_allie3 + " est KO"
+							ECRIRE "Veuillez choisir un autre pokémon"
+						SINON
+							ECRIRE "Vous n'avez pas de pokemon a cet emplacement"
+							ECRIRE "Veuillez choisir un autre pokémon"
+						FINSI
+					FINSI
+				CASPARDEFAUT :
+					ECRIRE "Veuillez entrer un nombre valide..."
+		FINCASPARMI
+	FINTANTQUE
+FIN
+
+procedure lvl_up
+//BUT affecter les statistiques du pokemon principal en fonction de son niveau
+//ENTREE rien
+//SORTIE rien
+
+DEBUT
+	CAS nom_allie PARMI
+		CAS "Salameche"	:	pv_allie_max <-- 36 + (2 * lvl_allie)
+							pv_allie <-- pv_allie + 2
+							atq_allie <-- 1 + (3 * lvl_allie)
+
+		CAS "Carapuce"	:	pv_allie_max <-- 44 + (2 * lvl_allie)
+							pv_allie <-- pv_allie + 2
+							atq_allie <-- 1 + (3 * lvl_allie)
+
+		CAS "Bulbizarre":	pv_allie_max <-- 50 + (3 * lvl_allie)
+							pv_allie <-- pv_allie + 3
+							atq_allie <-- 1 + (2 * lvl_allie)
+
+		CAS "Roucool"	:	pv_allie_max <-- 30 + (2 * lvl_allie)
+							pv_allie <-- pv_allie + 2
+							atq_allie <-- 2 + (2 * lvl_allie)
+
+		CAS "Pikachu"	:	pv_allie_max <-- 35 + (2 * lvl_allie)
+							pv_allie <-- pv_allie + 2
+							atq_allie <-- 1 + (2 * lvl_allie)
+
+		CAS "Racaillou"	:	pv_allie_max <-- 45 + (3 * lvl_allie)
+							pv_allie <-- pv_allie + 3
+							atq_allie <-- 1 + (2 * lvl_allie)
+
+		CAS "Machoc"	:	pv_allie_max <-- 39 + (2 * lvl_allie)
+							pv_allie <-- pv_allie + 2
+							atq_allie <-- 2 + (3 * lvl_allie)
+
+		CAS "Ratata"	:	pv_allie_max <-- 32 + (2 * lvl_allie)
+							pv_allie <-- pv_allie + 2
+							atq_allie <-- 1 + (4 * lvl_allie)
+
+		CAS "Magicarpe"	:	pv_allie_max <-- 36 + (2 * lvl_allie)
+							pv_allie <-- pv_allie + 2
+							atq_allie <-- 1 + (3 * lvl_allie)
+FIN
+
+
+Procedure ennemi_stats
+
+//BUT affecter les statistiques du pokemon ennemi en fonction de son niveau
+//ENTREE rien
+//SORTIE rien
+
+DEBUT
+	CAS nom_ennemi PARMI
+		CAS "Salameche"	:	pv_ennemi_max <-- 36 + (2 * lvl_ennemi)
+							atq_ennemi <-- 1 + (3 * lvl_allie)
+							type_ennemi <-- "feu"
+
+		CAS "Carapuce"	:	pv_ennemmi_max <-- 44 + (2 * lvl_ennemmi)
+							atq_ennemmi <-- 1 + (3 * lvl_ennemmi)
+							type_ennemi <-- "eau"
+
+		CAS "Bulbizarre":	pv_ennemmi_max <-- 50 + (3 * lvl_ennemmi)
+							atq_ennemmi <-- 1 + (2 * lvl_ennemmi)
+							type_ennemi <-- "feu"
+
+		CAS "Roucool"	:	pv_ennemmi_max <-- 30 + (2 * lvl_ennemmi)
+							atq_ennemmi <-- 2 + (2 * lvl_ennemmi)
+							type_ennemi <-- "feu"
+
+		CAS "Pikachu"	:	pv_ennemmi_max <-- 35 + (2 * lvl_ennemmi)
+							atq_ennemmi <-- 1 + (2 * lvl_ennemmi)
+							type_ennemi <-- "feu"
+
+		CAS "Racaillou"	:	pv_ennemmi_max <-- 45 + (3 * lvl_ennemmi)
+							atq_ennemmi <-- 1 + (2 * lvl_ennemmi)
+							type_ennemi <-- "feu"
+
+		CAS "Machoc"	:	pv_ennemmi_max <-- 39 + (2 * lvl_ennemmi)
+							atq_ennemmi <-- 2 + (3 * lvl_ennemmi)
+							type_ennemi <-- "feu"
+
+		CAS "Ratata"	:	pv_ennemmi_max <-- 32 + (2 * lvl_ennemmi)
+							atq_ennemmi <-- 1 + (4 * lvl_ennemmi)
+							type_ennemi <-- "feu"
+
+		CAS "Magicarpe"	:	pv_ennemmi_max <-- 36 + (2 * lvl_ennemmi)
+							atq_ennemmi <-- 1 + (3 * lvl_ennemmi)
+							type_ennemi <-- "feu"
+	FINCASPARMI
+	pv_ennemi <-- pv_ennemi_max
+FIN
+
+procédure attaque_salameche (nom : CHAINE pv_ennemi : ENTIER)
+//BUT afficher et executer les attaques de Salameche
+//ENTREE 1 ou 2 en fonction de l'attaque selectionnee
+//SORTIE le nom de l'attaque choisie et son effet sur l ennemi
+var touche_attaque : ENTIER
+DEBUT
+
+								ECRIRE "1: griffe"
+								ECRIRE "2: flammèche"
+								LIRE touche_attaque
+								CAS touche_attaque PARMI
+
+									CAS 1: pv_ennemi <- pv_ennemi - (3 * atq_allie)
+											ECRIRE nom_allie + " Utilise Griffe"
+									CAS 2: 	ECRIRE nom_allie + " Utilise Flammèche"
+											SI type_ennemi = "eau" ALORS
+												pv_ennemi <- pv_ennemi - (2 * atq_allie)
+												ECRIRE "Ce n'est pas très efficace"
+											SINON
+												SI type_ennemi = "plante" ALORS
+													pv_ennemi <- pv_ennemi - (8 * atq_allie)
+													ECRIRE "C'est tres efficace !"
+												SINON
+													pv-ennemi <- pv_ennemi - (4 * atq_allie)
+												FINSI
+											FINSI
+								FINCASPARMI
+FIN
+
+
+procédure attaque_carapuce
+//BUT afficher et executer les attaques de Carapuce
+//ENTREE 1 ou 2 en fonction de l'attaque selectionnee
+//SORTIE le nom de l'attaque choisie et son effet sur l ennemi
+var touche_attaque : ENTIER
+DEBUT
+								ECRIRE "1: Charge"
+								ECRIRE "2: Pistolet a O"
+								LIRE touche_attaque
+								CAS touche_attaque PARMI
+
+									CAS 1: pv_ennemi <- pv_ennemi - (3 * atq_allie)
+											ECRIRE nom_allie + " Utilise Charge"
+									CAS 2: 	ECRIRE nom_allie + " Utilise Pistolet a O"
+											SI (type_ennemi = "plante") OU (type_ennemi = "electrique") ALORS
+												pv_ennemi <- pv_ennemi -  (1 * atq_allie)
+												ECRIRE "Ce n'est pas très efficace"
+											SINON
+												SI (type_ennemi = "feu") OU (type_ennemi = "roche") ALORS
+													pv_ennemi <- pv_ennemi (atq_allie * 6)
+													ECRIRE "C'est tres efficace !"
+												SINON
+													pv-ennemi <- pv_ennemi - (atq_allie * 3)
+												FINSI
+											FINSI
+								FINCASPARMI
+FIN
+
+procédure attaque_bulbizarre
+//BUT afficher et executer les attaques de Bulbizarre
+//ENTREE 1 ou 2 en fonction de l'attaque selectionnee
+//SORTIE le nom de l'attaque choisie et son effet sur l ennemi
+var touche_attaque : ENTIER
+DEBUT
+								ECRIRE "1: Charge"
+								ECRIRE "2: Fouet lianes"
+								LIRE touche_attaque
+								CAS touche_attaque PARMI
+
+									CAS 1: pv_ennemi <- pv_ennemi - (2 * atq_allie)
+											ECRIRE nom_allie + " Utilise "Charge
+									CAS 2: 	ECRIRE nom_allie + " Utilise Fouet lianes"
+											SI (type_ennemi = "feu") OU (type_ennemi = "vol") ALORS
+												pv_ennemi <- pv_ennemi - (atq_allie)
+												ECRIRE "Ce n'est pas très efficace"
+											SINON
+												SI (type_ennemi = "eau") OU (type_ennemi = "roche") ALORS
+													pv_ennemi <- pv_ennemi (6 * atq_allie)
+													ECRIRE "C'est tres efficace !"
+												SINON
+													pv-ennemi <- pv_ennemi - (3 * atq_allie)
+												FINSI
+											FINSI
+								FINCASPARMI
+FIN
+
+
+
+
+procédure attaque_roucool
+//BUT afficher et executer les attaques de Roucool
+//ENTREE 1 ou 2 en fonction de l'attaque selectionnee
+//SORTIE le nom de l'attaque choisie et son effet sur l ennemi
+var touche_attaque : ENTIER
+DEBUT
+								ECRIRE "1: Vive-attaque"
+								ECRIRE "2: Tornade"
+								LIRE touche_attaque
+								CAS touche_attaque PARMI
+
+									CAS 1: pv_ennemi <- pv_ennemi - (2 * atq_allie)
+											ECRIRE nom_allie + " Utilise Vive-attaque"
+									CAS 2: 	ECRIRE nom_allie + " Utilise Tornade"
+											SI (type_ennemi = "roche") OU (type_ennemi = "electrique") ALORS
+												pv_ennemi <- pv_ennemi - (1 * atq_allie)
+												ECRIRE "Ce n'est pas très efficace"
+											SINON
+												SI (type_ennemi = "plante") OU (type_ennemi = "combat") ALORS
+													pv_ennemi <- pv_ennemi - (4 * atq_allie)
+													ECRIRE "C'est tres efficace !"
+												SINON
+													pv-ennemi <- pv_ennemi - (2 * atq_allie)
+												FINSI
+											FINSI
+								FINCASPARMI
+FIN
+
+
+procédure attaque_pikachu
+//BUT afficher et executer les attaques de Pikachu
+//ENTREE 1 ou 2 en fonction de l'attaque selectionnee
+//SORTIE le nom de l'attaque choisie et son effet sur l ennemi
+var touche_attaque : ENTIER
+DEBUT
+								ECRIRE "1: Charge"
+								ECRIRE "2: Eclair"
+								LIRE touche_attaque
+								CAS touche_attaque PARMI
+
+									CAS 1: pv_ennemi <- pv_ennemi - (2 * atq_allie)
+											ECRIRE nom_allie + " Utilise Charge"
+									CAS 2: 	ECRIRE nom_allie + " Utilise Eclair"
+											SI (type_ennemi = "roche") OU (type_ennemi = "plante") ALORS
+												pv_ennemi <- pv_ennemi (2 * atq_allie)
+												ECRIRE "Ce n'est pas très efficace"
+											SINON
+												SI (type_ennemi = "eau") OU (type_ennemi = "vol") ALORS
+													pv_ennemi <- pv_ennemi - (6 * atq_allie)
+													ECRIRE "C'est tres efficace !"
+												SINON
+													pv-ennemi <- pv_ennemi - (4 * atq_allie)
+												FINSI
+											FINSI
+								FINCASPARMI
+FIN
+
+procédure attaque_racaillou
+//BUT afficher et executer les attaques de Racaillou
+//ENTREE 1 ou 2 en fonction de l'attaque selectionnee
+//SORTIE le nom de l'attaque choisie et son effet sur l ennemi
+var touche_attaque : ENTIER
+DEBUT
+								ECRIRE "1: Roulade"
+								ECRIRE "2: Jet d pierre"
+								LIRE touche_attaque
+								CAS touche_attaque PARMI
+
+									CAS 1: pv_ennemi <- pv_ennemi - (2 * atq_allie)
+											ECRIRE nom_allie + " Utilise Griffe"
+									CAS 2: 	ECRIRE nom_allie + " Utilise Flammèche"
+											SI (type_ennemi = "feu") OU (type_ennemi = "vol") ALORS
+												pv_ennemi <- pv_ennemi - (1 * atq_allie)
+												ECRIRE "Ce n'est pas très efficace"
+											SINON
+												SI (type_ennemi = "feu") OU (type_ennemi = "vol") ALORS
+													pv_ennemi <- pv_ennemi - (4 * atq_allie)
+													ECRIRE "C'est tres efficace !"
+												SINON
+													pv-ennemi <- pv_ennemi - (2 * atq_allie)
+												FINSI
+											FINSI
+								FINCASPARMI
+FIN
+
+procédure attaque_machoc
+//BUT afficher et executer les attaques de Machoc
+//ENTREE 1 ou 2 en fonction de l'attaque selectionnee
+//SORTIE le nom de l'attaque choisie et son effet sur l ennemi
+var touche_attaque : ENTIER
+DEBUT
+								ECRIRE "1: griffe"
+								ECRIRE "2: flammèche"
+								LIRE touche_attaque
+								CAS touche_attaque PARMI
+
+									CAS 1: pv_ennemi <- pv_ennemi - (2 * atq_allie)
+											ECRIRE nom_allie + " Utilise Griffe"
+									CAS 2: 	ECRIRE nom_allie + " Utilise Flammèche"
+											SI (type_ennemi = "feu") OU (type_ennemi = "vol") ALORS
+												pv_ennemi <- pv_ennemi - (2 * atq_allie)
+												ECRIRE "Ce n'est pas très efficace"
+											SINON
+												SI (type_ennemi = "feu") OU (type_ennemi = "vol") ALORS
+													pv_ennemi <- pv_ennemi - (5 * atq_allie)
+													ECRIRE "C'est tres efficace !"
+												SINON
+													pv-ennemi <- pv_ennemi - (3 * atq_allie)
+												FINSI
+											FINSI
+								FINCASPARMI
+FIN
+procédure attaque_ratata
+//BUT afficher et executer les attaques de Ratata
+//ENTREE 1 ou 2 en fonction de l'attaque selectionnee
+//SORTIE le nom de l'attaque choisie et son effet sur l ennemi
+var touche_attaque : ENTIER
+DEBUT
+								ECRIRE "1: griffe"
+								ECRIRE "2: flammèche"
+								LIRE touche_attaque
+								CAS touche_attaque PARMI
+
+									CAS 1: pv_ennemi <- pv_ennemi - (4 * atq_allie)
+											ECRIRE nom_allie + " Utilise Griffe"
+									CAS 2: 	ECRIRE nom_allie + " Utilise Flammèche"
+											SI (type_ennemi = "feu") OU (type_ennemi = "vol") ALORS
+												pv_ennemi <- pv_ennemi - (1 * atq_allie)
+												ECRIRE "Ce n'est pas très efficace"
+											SINON
+												SI (type_ennemi = "feu") OU (type_ennemi = "vol") ALORS
+													pv_ennemi <- pv_ennemi - (5 * atq_allie)
+													ECRIRE "C'est tres efficace !"
+												SINON
+													pv-ennemi <- pv_ennemi - (4 * atq_allie)
+												FINSI
+											FINSI
+								FINCASPARMI
+FIN
+
+procédure attaque_magicarpe
+//BUT afficher et executer les attaques de Magicarpe
+//ENTREE 1 ou 2 en fonction de l'attaque selectionnee
+//SORTIE le nom de l'attaque choisie et son effet sur l ennemi
+var touche_attaque : ENTIER
+DEBUT
+								ECRIRE "1: griffe"
+								ECRIRE "2: flammèche"
+								LIRE touche_attaque
+								CAS touche_attaque PARMI
+
+									CAS 1: pv_ennemi <- pv_ennemi - (atq_allie)
+											ECRIRE nom_allie + " Utilise Griffe"
+									CAS 2: 	ECRIRE nom_allie + " Utilise Flammèche"
+											SI (type_ennemi = "feu") OU (type_ennemi = "vol") ALORS
+												pv_ennemi <- pv_ennemi - atq_allie
+												ECRIRE "Ce n'est pas très efficace"
+											SINON
+												SI (type_ennemi = "feu") OU (type_ennemi = "vol") ALORS
+													pv_ennemi <- pv_ennemi - atq_allie
+													ECRIRE "C'est tres efficace !"
+												SINON
+													pv-ennemi <- pv_ennemi - atq_allie
+												FINSI
+											FINSI
+								FINCASPARMI
+FIN
+
+procedure interace_combat
+//BUT Afficher l interface du jeu
+//ENTREE rien
+//SORTIE l interface de combat
+
+DEBUT
+	ECRIRE "Un " + nom_Ennemi + " apparait !"
+	ECRIRE nom_Ennemi
+	ECRIRE "PV : " + pv_ennemi + "/" + pv_ennemi_max
+	procedure affiche_ennemi
+
+
+	ECRIRE nom_allie
+	ECRIRE "PV : " + pv_allie + "/" + pv_allie_max
+	procedure affiche_allie
+FIN
+
+procedure attaque_pascal
+//BUT Réalisez le comportement du boss
+//ENTREE rien
+//SORTIE rien
+
+VAR : 	type_boss : ENTIER
+		
+
+DEBUT
+	//pv_boss <- 250
+	//ATK <- 14
+	//feu <- 1
+	//eau <- 2
+	//plante <- 3
+	//roche <- 4
+	//air <- 5
+	//combat <- 6
+	//electrique <- 7
+	//normal <- 8
+
+	type_boss <-- random (8)
+
+	CAS type_boss PARMIS
+
+		CAS 1 :		type_ennemi <-- "feu"
+					SI type_ennemi = plante ALORS
+							pv_ennemi <- pv_ennemi - 50
+							ECRIRE "C est très efficace !"
+						SINON
+							SI type_ennemi = eau OU type_ennemi = roche ALORS
+								pv_ennemi <- pv_ennemi - 10
+								ECRIRE "Ceci n est pas tres efficace"
+							SINON
+								pv_ennemi <- pv_ennemi - 20
+							FINSI
+					FINSI
+		CAS 2:		type_ennemi <-- "eau"
+					SI type_ennemi = feu OU type_ennemi = roche OU type_ennemi = electrique ALORS
+						pv_ennemi <- pv_ennemi - 50
+						ECRIRE "C est très efficace !"
+					SINON
+						SI type_ennemi = plante ALORS
+							pv_ennemi <- pv_ennemi - 10
+							ECRIRE "Ceci n est pas tres efficace"
+						SINON
+							pv_ennemi <- pv_ennemi - 20
+						FINSI
+					FINSI
+		CAS 3:		type_ennemi <-- "plante"
+					SI type_ennemi = eau OU type_ennemi = roche ALORS
+						pv_ennemi <- pv_ennemi - 50
+						ECRIRE "C est très efficace !"
+					SINON
+						SI type_ennemi = feu OU type_ennemi = air ALORS
+							pv_ennemi <- pv_ennemi - 10
+							ECRIRE "Ceci n est pas tres efficace"
+						SINON
+							pv_ennemi <- pv_ennemi - 20
+						FINSI
+					FINSI
+		CAS 4:		type_ennemi <-- "roche"
+					SI type_ennemi = feu OU type_ennemi = "vol" ALORS
+						pv_ennemi <- pv_ennemi - 50
+						ECRIRE "C est très efficace !"
+					SINON
+						SI type_ennemi = combat ALORS
+							pv_ennemi <- pv_ennemi - 10
+							ECRIRE "Ceci n est pas tres efficace"
+						SINON
+							pv_ennemi <- pv_ennemi - 20
+						FINSI
+					FINSI
+		CAS 5:		type_ennemi <-- "vol"
+					SI type_ennemi = plante OU type_ennemi = combat ALORS
+						pv_ennemi <- pv_ennemi - 50
+						ECRIRE "C est très efficace !"
+					SINON
+						SI touche_attaque = roche OU touche_attaque = electrique ALORS
+							pv_ennemi <- pv_ennemi - 10
+							ECRIRE "Ceci n est pas tres efficace"
+						SINON
+							pv_ennemi <- pv_ennemi - 20
+						FINSI
+					FINSI
+		CAS 6:		type_ennemi <-- "combat"
+					SI type_ennemi = normal OU type_ennemi = roche ALORS
+						pv_ennemi <- pv_ennemi - 50
+						ECRIRE "C est très efficace !"
+					SINON
+						SI type_ennemi = vol OU type_ennemi = plante ALORS
+							pv_ennemi <- pv_ennemi - 10
+							ECRIRE "Ceci n est pas tres efficace"
+						SINON
+							pv_ennemi <- pv_ennemi - 20
+						FINSI
+					FINSI
+		CAS 7:		type_ennemi <-- "electrique"
+					SI type_ennemi = eau OU type_ennemi = air ALORS
+						pv_ennemi <- pv_ennemi - 50
+						ECRIRE "C est très efficace !"
+					SINON
+						SI type_ennemi = roche OU type_ennemi = plante ALORS
+							pv_ennemi <- pv_ennemi - 10
+							ECRIRE "Ceci n est pas tres efficace"
+						SINON
+							pv_ennemi <- pv_ennemi - 20
+						FINSI
+					FINSI
+		CAS 8:		type_ennemi <-- "normal"
+					SI type_ennemi = roche ALORS
+						pv_ennemi <- pv_ennemi - 10
+						ECRIRE "Ceci n est pas tres efficace"
+					SINON
+						pv_ennemi <- pv_ennemi - 20
+					FINSI
+	FINCASPARMIS
+	ECRIRE nom_ennemi + " est maintenant de type " + type_ennemi
+	ECRIRE nom_ennemi + " utilise erreur de compilation !"
+FIN
+
+
+procedure tour_ennemi
+//BUT determine l'action de l'ennemi
+//ENTREE rien
+//SORTIE l'action réalisée par l'ennemi
+
+var attaque_ennemi : integer
+
+DEBUT
+	attaque_ennemi <- random (10)
+	CAS nom_ennemi PARMI
+
+		CAS "Salameche" 	:	SI attaque_ennemi > 5 ALORS
+									pv_allie <-- pv_allie - (3 * atq_ennemi)
+									ECRIRE nom_ennemi + " Utilise Griffe"
+								SINON
+									ECRIRE nom_ennemi + " Utilise Flammèche"
+									SI type_allie = "eau" ALORS
+										pv_allie <-- pv_allie - (2 * atq_ennemi)
+										ECRIRE "Ce n est pas tres efficace"
+									SINON
+										SI type_allie = "plante" ALORS
+											pv_allie <-- pv_allie - (8 * atq_ennemi)
+											ECRIRE "C est super efficace"
+										SINON
+											pv_allie <-- pv_allie - (4 * atq_ennemi)
+										FINSI
+									FINSI
+									
+								FINSI
+
+		CAS "Carapuce" 		:	SI attaque_ennemi > 5 ALORS
+									pv_allie <-- pv_allie - (3 * atq_ennemi)
+									ECRIRE nom_ennemi + " Utilise Charge"
+								SINON
+									ECRIRE nom_ennemi + " Utilise Pistolet a O"
+									SI type_allie = "plante" OU type_allie = "electrique" ALORS
+										pv_allie <-- pv_allie - (1 * atq_ennemi)
+										ECRIRE "Ce n est pas tres efficace"
+									SINON
+										SI type_allie = "feu" OU type_allie = "roche" ALORS
+											pv_allie <-- pv_allie - (6 * atq_ennemi)
+											ECRIRE "C est super efficace"
+										SINON
+											pv_allie <-- pv_allie - (3 * atq_ennemi)
+										FINSI
+									FINSI
+									
+								FINSI
+
+		CAS "Bulbizarre" 	:	SI attaque_ennemi > 5 ALORS
+									pv_allie <-- pv_allie - (2 * atq_ennemi)
+									ECRIRE nom_ennemi + " Utilise Charge"
+								SINON
+									ECRIRE nom_ennemi + " Utilise Fouet lianes"
+									SI type_allie = "feu" OU type_allie = "vol" ALORS
+										pv_allie <-- pv_allie - (1 * atq_ennemi)
+										ECRIRE "Ce n est pas tres efficace"
+									SINON
+										SI type_allie = "roche" OU type_allie = "eau" ALORS
+											pv_allie <-- pv_allie - (6 * atq_ennemi)
+											ECRIRE "C est super efficace"
+										SINON
+											pv_allie <-- pv_allie - (3 * atq_ennemi)
+										FINSI
+									FINSI
+									
+								FINSI
+
+		CAS "Roucool" 		:	SI attaque_ennemi > 5 ALORS
+									pv_allie <-- pv_allie - (2 * atq_ennemi)
+									ECRIRE nom_ennemi + " Utilise Vive-attaque"
+								SINON
+									ECRIRE nom_ennemi + " Utilise Tornade"
+									SI type_allie = "roche" OU type_allie = "electrique" ALORS
+										pv_allie <-- pv_allie - (1 * atq_ennemi)
+										ECRIRE "Ce n est pas tres efficace"
+									SINON
+										SI type_allie = "plante" OU type_allie = "combat" ALORS
+											pv_allie <-- pv_allie - (4 * atq_ennemi)
+											ECRIRE "C est super efficace"
+										SINON
+											pv_allie <-- pv_allie - (2 * atq_ennemi)
+										FINSI
+									FINSI
+									
+								FINSI
+
+		CAS "Pikachu" 		:	SI attaque_ennemi > 5 ALORS
+									pv_allie <-- pv_allie - (2 * atq_ennemi)
+									ECRIRE nom_ennemi + " Utilise Charge"
+								SINON
+									ECRIRE nom_ennemi + " Utilise Eclair"
+									SI type_allie = "roche" OU type_allie = "plante" ALORS
+										pv_allie <-- pv_allie - (2 * atq_ennemi)
+										ECRIRE "Ce n est pas tres efficace"
+									SINON
+										SI type_allie = "vol" OU type_allie = "eau" ALORS
+											pv_allie <-- pv_allie - (6 * atq_ennemi)
+											ECRIRE "C est super efficace"
+										SINON
+											pv_allie <-- pv_allie - (4 * atq_ennemi)
+										FINSI
+									FINSI
+									
+								FINSI
+
+		CAS "Racaillou" 	:	SI attaque_ennemi > 5 ALORS
+									pv_allie <-- pv_allie - (2 * atq_ennemi)
+									ECRIRE nom_ennemi + " Utilise Roulade"
+								SINON
+									ECRIRE nom_ennemi + " Utilise Jet d pierre"
+									SI type_allie = "eau" OU type_allie = "combat" ALORS
+										pv_allie <-- pv_allie - (1 * atq_ennemi)
+										ECRIRE "Ce n est pas tres efficace"
+									SINON
+										SI type_allie = "feu" OU type_allie = "vol" ALORS
+											pv_allie <-- pv_allie - (4 * atq_ennemi)
+											ECRIRE "C est super efficace"
+										SINON
+											pv_allie <-- pv_allie - (2 * atq_ennemi)
+										FINSI
+									FINSI
+									
+								FINSI
+
+		CAS "Machoc" 		:	SI attaque_ennemi > 5 ALORS
+									pv_allie <-- pv_allie - (2 * atq_ennemi)
+									ECRIRE nom_ennemi + " Utilise Damocles"
+								SINON
+									ECRIRE nom_ennemi + " Utilise Balayage"
+									SI type_allie = "vol" OU type_allie = "plante" ALORS
+										pv_allie <-- pv_allie - (2 * atq_ennemi)
+										ECRIRE "Ce n est pas tres efficace"
+									SINON
+										SI type_allie = "normal" OU type_allie = "roche" ALORS
+											pv_allie <-- pv_allie - (5 * atq_ennemi)
+											ECRIRE "C est super efficace"
+										SINON
+											pv_allie <-- pv_allie - (3 * atq_ennemi)
+										FINSI
+									FINSI
+									
+								FINSI
+
+		CAS "Ratata" 		:	SI attaque_ennemi > 5 ALORS
+									pv_allie <-- pv_allie - (3 * atq_ennemi)
+									ECRIRE nom_ennemi + " Utilise Charge"
+								SINON
+									ECRIRE nom_ennemi + " Utilise Croc fatal"
+									SI type_allie = "roche" ALORS
+										pv_allie <-- pv_allie - (1 * atq_ennemi)
+										ECRIRE "Ce n est pas tres efficace"
+									SINON
+										pv_allie <-- pv_allie - (4 * atq_ennemi)
+									FINSI
+									
+								FINSI
+
+		CAS "Magicarpe" 	:	ECRIRE nom_ennemi + " Utilise Trempette"
+								ECRIRE "Mais rien ne se passe..."
+
+		CAS "PASCAL" 		:	procedure attaque_pascal
+	FINCASPARMI
+FIN
+
+
+
+
+
+procedure combat
+//BUT permet le bon deoulement d'un combat
+//ENTREE les actions selectionnees
+//SORTIE le vainqueur du combat
+DEBUT
+
+
+	 //********************************************************************************************************************************************************************
+	 // COMBAT
+	 //********************************************************************************************************************************************************************
+	victoire <-- faux
+	TANTQUE victoire = faux FAIRE
+		ECRIRE"Un" + nom_ennemi + " sauvage apparait!"
+		TANTQUE pv_allie > 0 ET pv_ennemi > 0 et fuite = faux FAIRE
+			
+			procedure interface_combat
+
+			ECRIRE "1 : attaquer"
+			ECRIRE "2 : objet"
+			ECRIRE "3 : fuir"
+			ECRIRE "4 : changer "
+			LIRE touche
+
+		
+			CAS touche PARMI
+				CAS 1:  
+						CAS nom_allie PARMI
+							CAS "Salameche":
+									procedure attaque_salameche
+							CAS "Carapuce" :
+									procedure attaque_carapuce
+							CAS "Bulbizarre" :
+									procedure attaque_bulbizarre
+							CAS "Roucool" :
+									procedure attaque_roucool
+							CAS "Pikachu" :
+									procedure attaque_pikachu
+							CAS "Racaillou" :
+									procedure attaque_racaillou
+							CAS "Machoc" :
+									procedure attaque_machoc
+							CAS "Ratata" :
+									procedure attaque_ratata
+							CAS "Magicarpe" :
+									procedure attaque_magicarpe
+						FINCASPARMI
+				CAS 2:
+					ECRIRE "1: potion (x" + nbr_potion +")"
+					ECRIRE "2: pokeballs (x" + nbr_pokeball + ")"
+					LIRE touche_objet
+					CAS touche_objet PARMI
+						CAS 1:	SI nbr_potion > 0 ET pv_allie < pv_allie_max - 30 ALORS
+									nbr_potion <- nbr_potion -1	
+									ECRIRE nom_joueur + " utilise une potion"
+									ECRIRE nom_allie + " a recupere 30PV"
+									pv_allie <-- pv_allie + 30
+								SINON
+									SI nbr_potion > 0 ET pv_allie < pv_allie_max ALORS
+										nbr_potion <-- nbr_potion-1
+										ECRIRE nom_joueur + " Utilise une potion"
+										ECRIRE "Les PV de " + nom_allie + " sont au maximum"
+										pv_allie <-- pv_allie_max
+									SINON
+										SI nbr_potion <= 0 ALORS
+											ECRIRE "Vous n'avez plus de potions"
+										SINON
+											ECRIRE "Vous avez trop de points de vie"
+										FINSI
+									FINSI
+								FINSI
+						CAS 2: 	chance_capture <-- random(10)
+								SI nbr_pokeball > 0 ET chance_capture > 2 ET nom_allie2 = "" ALORS
+									nbr_pokeball <-- nbr_pokeball - 1
+									ECRIRE nom_joueur + "Utilise une pokeball"
+									ECRIRE "Pokémon capturé"
+									nom_allie2 <-- nom_ennemi
+									pv_allie2 <-- pv_ennemi
+									pv_allie2_max <-- pv_ennemi_max
+									type_allie2 <-- type_ennemi
+									pv_ennemi <-- 0
+								SINON
+									SI nbr_pokeball > 0 ET chance_capture > 2 ET nom_allie3 = "" ALORS
+										nbr_pokeball <-- nbr_pokeball - 1
+										ECRIRE nom_joueur + "Utilise une pokeball"
+										ECRIRE "Pokémon capturé"
+										nom_allie3 <-- nom_ennemi
+										pv_allie3<-- pv_ennemi
+										pv_allie3_max <-- pv_ennemi_max
+										type_allie3 <-- type_ennemi
+										pv_ennemi <-- 0
+									SINON
+										SI nbr_pokeball > 0 ET chance_capture > 2 ALORS
+											ECRIRE"Vous n avez plus de place dans votre equipe"
+											nbr_pokeball <-- nbr_pokeball - 1
+										SINON
+											SI chance_capture <= 2 ET nbr_pokeball > 0 ALORS
+												nbr_pokeball <-- nbr_pokeball - 1
+												ECRIRE "Raté"
+											SINON
+												ECRIRE "Vous n'avez plus de pokeballs"
+											FINSI
+										FINSI
+									FINSI
+								FINSI
+					FINCASPARMI
+
+				CAS 3:	chance_fuite <- random (10)
+						SI chance_fuite > 4 ALORS
+							ECRIRE "Vous n'arrivez pas à fuir"
+						SINON
+							fuite := vrai
+						FINSI 
+				CAS 4:  ECRIRE "2 : " + nom_allie2 + " (" + pv_allie2 + " pv)"
+					   	ECRIRE "3 : " + nom_allie3 + " (" + pv_allie3 + " pv)"
+					   	procedure changement_allie
+				CASPARDEFAUT :
+						ECRIRE "Veuillez entrer un nombre valide..."
+			FINCASPARMI
+			SI pv_allie > 0 ET pv_ennemi > 0 et fuite = faux ALORS
+				tour_ennemi
+			FINSI
+			SI (pv_allie <= 0) ET ((pv_allie2 > 0) OU (pv_allie3 > 0)) ALORS
+				ECRIRE nom_allie + "Est KO"
+				ECRIRE "Choisissez son remplaçant"
+				ECRIRE "2 : " + nom_allie2 + " (" + pv_allie2 + ")"
+				ECRIRE "3 : " + nom_allie3 + " (" + pv_allie3 + ")"
+				procedure changement_allie
+				ECRIRE nom_allie + "En avant !"
+			FINSI
+		FINTANTQUE
+		SI fuite = vrai ALORS
+			ECRIRE "Vous avez fuit"
+		SINON
+			SI pv_allie > 0
+				ECRIRE "Vous avez gagné !!!"
+				xp_allie <-- xp_allie + 100
+				TANTQUE (xp_allie > xp_allie_max) FAIRE
+					xp_allie <-- xp_allie - xp_allie_max
+					lvl_allie <-- lvl_allie +1
+					xp_allie_max <-- 80 + (5 * lvl_allie)
+					ECRIRE
+					"Felicitations !! " + nom_allie + " passe au niveau " + lvl_allie
+				FINTANTQUE
+				procedure lvl_up
+			SINON
+				ECRIRE "Vous avez perdu !"
+				ECRIRE "Tous vos PV ont été restaurés"
+				pv_allie <-- pv_allie_max
+				pv_allie2 <-- pv_allie2_max
+				pv_allie3 <-- pv_allie3_max
+				pv_ennemi <-- pv_ennemi_max
+			FINSI
+		FINSI
+	FINTANTQUE
+
+FIN
+
+procedure intro
+//BUT realiser l introduction du jeu
+//ENTREE le nom entre par le joueur et un chiffre designant le pokemon choisi
+//SORTIE le pokemon choisi un un acces a un combat avec celui-ci
+
+VAR touche_choix : ENTIER
+
+DEBUT
+	procedure affiche_intro
+	ECRIRE "??? : Bienvenue dans le monde merveilleux des Pokemons"
+
+	procedure affiche_intro
+	ECRIRE "??? : Tu t'appretes a vivre une aventure epique. En appuyant sur Entree tu ne pourras plus faire marche arriere."
+
+	procedure affiche_intro
+	ECRIRE "??? : Mais dis-moi, quel est ton nom ?"
+	LIRE nom_joueur
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Enchante " + nom_joueur + " je suis le professeur Hatton !"
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : L experience que tu vas vivre a ete developpee par deux de mes etudiants"
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : ..."
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : (Esperons qu ils n aient pas fait n importe quoi...)"
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Hum... Toujours est-il que je suis la pour te guider dans ton aventure"
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Afin de pouvoir affronter d autres dresseurs, tu devras etre accompgne"
+	ECRIRE "d un petit compagnon."
+
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Je peux te proposer trois compagnons, a toi de faire le bon choix"
+	ECRIRE "------------------------------------------------------------------"
+	ECRIRE "1 : Bulbizarre"
+	ECRIRE "	Type : plante"
+	ECRIRE "	Niveau : 3"
+	ECRIRE "	PV : 59"
+	ECRIRE "	Attaque : 7"
+
+	ECRIRE "------------------------------------------------------------------"
+	ECRIRE "2 : Carapuce"
+	ECRIRE "	Type : eau"
+	ECRIRE "	Niveau : 3"
+	ECRIRE "	PV : 50"
+	ECRIRE "	Attaque : 10"
+
+	ECRIRE "------------------------------------------------------------------"
+	ECRIRE "3 : Salameche"
+	ECRIRE "	Type : feu"
+	ECRIRE "	Niveau : 3"
+	ECRIRE "	PV : 42"
+	ECRIRE "	Attaque : 10"
+
+	LIRE touche_choix
+	lvl_allie <-- 3
+	lvl_ennemi <-- 3
+
+	CAS touche_choix PARMI
+
+			CAS 1 : nom_allie = "Bulbizarre"
+					type_allie = "plante"
+					nom_ennemi = "Carapuce"
+
+			CAS 2 : nom_allie = "Carapuce"
+					type_allie = "eau"
+					nom_ennemi = "Salameche"
+
+			CAS 3 : nom_allie = "Salameche"
+					type_allie = "feu"
+					nom_ennemi = "Bulbizarre"
+	FINCASPARMI
+	procedure lvl_up
+	procedure ennemi_stats
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Hum... Ainsi tu as choisi " + nom_allie + " !"
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Faisons donc un combat pour voir ce que tu as dans le ventre."
+
+	procedure affiche_intro
+	ECRIRE "*Le Pr. Hatton envoie un " + nom_ennemi + "*"
+
+	procedure combat
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Tu t es bien debrouille, felicitations !"
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : J ai rarement vu un talent comme le tien."
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : J ai entendu parler d un bug informatique au Bourg Palette."
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Il aurait ete cause par un Pokemon electrique."
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Peut-etre que toi et ton compagnon pourriez faire quelque chose..."
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Attends quelques instants, je vais soigner ton " + nom_allie + " apres ce combat eprouvant."
+
+	pv_allie <-- pv_allie_max
+
+	procedure affiche_intro
+	ECRIRE "*Tous les PV ont été restaurés.*"
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Voici egalemnt de l equipement pour ton aventure"
+
+	procedure affiche_intro
+	ECRIRE "*3 potions et 3 pokeballs ont ete rajoutees a votre inventaire*"
+	nbr_potions <-- 3
+	nbr_pokeballs <-- 3
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Bon courage " + nom_joueur + " !"
+
+	procedure affiche_intro
+	ECRIRE "Pr. Hatton : Et prends garde aux Pokemons sauvages"
+
+
+FIN
+
+procedure histoire1
+//BUT realiser la premiere phase d histoire du jeu
+//ENTREE rien
+//SORTIE le lancement d un combat avec les pokemons de l allie et l affichage de la première histoire
+
+DEBUT
+	procedure affiche_histoire1_1
+	ECRIRE "*Vous marchez sur un sentier en direction du Bourg Palette*"
+
+	procedure affiche_histoire1_1
+	ECRIRE "*Tout semble calme*"
+
+	procedure affiche_histoire1_1
+	ECRIRE "*Trop calme...*"
+
+	procedure affiche_histoire1_1
+	ECRIRE "*Quand tout a coup !*"
+
+	procedure affiche_histoire1_2
+	ECRIRE "*Un roucool agressif fait son apparition*"
+
+	procedure affiche_histoire1_2
+	ECRIRE "*Il se jette sans hesitation sur votre " + nom_allie +"*"
+
+	nom_ennemi <-- "Roucool"
+	lvl_ennemi <-- 4
+	procedure ennemi_stats
+	procedure combat
+
+	procedure affiche_histoire1_1
+	ECRIRE "*Une fois le combat termine, vous reprenez votre route*"
+FIN
+
+procedure histoire2
+//BUT realiser la deuxieme phase d histoire du jeu
+//ENTREE rien
+//SORTIE le lancement d un combat avec les pokemons de l allie et l affichage de la deuxieme histoire
+
+DEBUT
+	procedure affiche_histoire2_1
+	ECRIRE "*Vous arrivez au Bourg Palette*"
+
+	procedure affiche_histoire2_1
+	ECRIRE "*Des bruits d explosion provenant d une maison sur votre gauche attirent votre oeuil*"
+
+	procedure affiche_histoire2_1
+	ECRIRE "*Vous voyez un garcon s enfuir de la maison en flammes*"
+
+	procedure affiche_histoire2_1
+	ECRIRE "*Il se dirige vers vous en criant*"
+
+	procedure affiche_histoire2_2
+	ECRIRE "??? : AAAH ! A L AIDE !!! MON PIKACHU EST POSSEDE ! IL FAUT M AIDER !"
+
+	procedure affiche_histoire2_3
+	ECRIRE "*A peine eut-il le temps de finir sa phrase qu une souris jaune apparait au coin de la rue*"
+
+	procedure affiche_histoire2_3
+	ECRIRE "*Elle semble enragee*"
+
+	procedure affiche_histoire2_3
+	ECRIRE "*Appercevant votre Pokemon, le Pikachu se jette dessus*"
+
+	procedure affiche_histoire2_3
+	ECRIRE "PIKAAAAAAAA !"
+
+	lvl_ennemi <-- 4
+	nom_ennemi <-- "Pikachu"
+	procedure ennemi_stats
+	procedure combat
+
+	procedure affiche_histoire2_3
+	ECRIRE "*Le Pikachu semble a bout de forces et se dirige docilement vers son maitre*"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Enchante ! Je m appelle Sacha Ketchum"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Tu dois etre " + nom_joueur + "!"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Le Pr. Hatton m a prevenu de ton arrivee"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Il m a dit que tu etais doue pour le combat,"
+	ECRIRE "        mais il a minimise ton talent !"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Desole pour ce contre temps..."
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Depuis que la Team Rocket s est installe dans notre village,"
+	ECRIRE "        les Pokemons ont un comportement bizarre"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Ils appelent cela le projet Pascal"
+	ECRIRE "        mais leurs intentions restent mysterieuses..."
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Ils ont base leur station scientiifque a cote du"
+	ECRIRE "        dojo, peut-etre que tu pourrais aller voir ce qui s y trame"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Le dojo se trouve de l autre cote de la grotte au sud du village"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Je vais passer un peu de super potion sur tes Pokemons,"
+	ECRIRE "        car la grotte est dangereuse."
+
+
+	SI pv_allie < pv_allie_max - 50 ALORS
+		pv_allie <-- pv_allie + 50
+	SINON
+		SI pv_allie < pv_allie_max ALORS
+			pv_allie <-- pv_allie_max
+		FINSI
+	FINSI
+
+	SI pv_allie2 < pv_allie2_max - 50 ALORS
+		pv_allie2 <-- pv_allie2 + 50
+	SINON
+		SI pv_allie2 < pv_allie2_max ALORS
+			pv_allie2 <-- pv_allie2_max
+		FINSI
+	FINSI
+
+	procedure affiche_histoire2_2
+	ECRIRE "*50 PV ont ete rendus a tous vos Pokemons*"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Je vais prevenir le Sensei de ton arrivee !!"
+
+FIN
+
+procedure histoire3
+//BUT realiser la troisieme phase d histoire du jeu
+//ENTREE rien
+//SORTIE le lancement d un combat avec les pokemons de l allie et l affichage de la troisieme histoire
+DEBUT
+	procedure affiche_histoire3
+	ECRIRE "*Vous penetrez dans une grotte extremement sombre*"
+
+	procedure affiche_histoire3
+	ECRIRE "*Apres quelques minutes de marche vous ne voyez plus rien, vous allumez donc votre lampe de poche*"
+
+	procedure affiche_histoire3
+	ECRIRE "*Son faisceau n eclaire que tres peu la galerie*"
+
+	procedure affiche_histoire3
+	ECRIRE "*Apres une petite periode de marche, vous trebuchez sur une pierre*"
+
+	procedure affiche_histoire3
+	ECRIRE "*Alors que vous etes a terre, vous remarquez que cette pierre possede des bras*"
+
+	procedure affiche_histoire3
+	ECRIRE "*Elle se retourne vers vous et s apprete a vous assener un coup*"
+
+	procedure affiche_histoire3
+	ECRIRE "*Vos equipiers s interposent pour vous defendre*"
+
+	lvl_ennemi <-- 5
+	nom_ennemi <-- "Racaillou"
+	procedure ennemi_stats
+	procedure combat
+
+	procedure affiche_histoire3
+	ECRIRE "*Apres ce combat, vous decouvrez que votre lampe ne fonctionne plus*"
+
+	procedure affiche_histoire3
+	ECRIRE "*Vous avancez a tatons dans la caverne*"
+
+	procedure affiche_histoire3
+	ECRIRE "*Finalement, vous appercevez la lumiere du jour au loin*"
+
+	procedure affiche_histoire3
+	ECRIRE "*Vous sortez enfin de cette grotte et remarquez ce qui semble etre un dojo a quelques centaines de merdres*"
+FIN
+
+procedure histoire4
+//BUT realiser la quatrieme phase d histoire du jeu
+//ENTREE rien
+//SORTIE le lancement d un combat avec les pokemons de l allie et l affichage de la quatrieme histoire
+DEBUT
+	procedure affiche_histoire4
+	ECRIRE "*Alors que vous vous avancez vers le dojo,*"
+	ECRIRE "*vous remarquez qu il est defendu par un Machoc.*"
+
+	procedure affiche_histoire4
+	ECRIRE "*Vous voyant approcher le Pokemon vous fonce dessus*"
+
+	nom_ennemi <-- "Machoc"
+	lvl_ennemi <-- 7
+	procedure ennemi_stats
+	procedure combat
+
+	procedure affiche_histoire4
+	ECRIRE "*Le machoc sonne semble avoir retrouve ses esprits*"
+
+	procedure affiche_histoire4
+	ECRIRE"*Le dojo, si plein de vie actuellement vous semble totalement vide*"
+
+	procedure affiche_histoire4
+	ECRIRE "*Machoc, inquiet, pointe une immense tour decoree d un grand R rouge*"
+	ECRIRE "*Que vous pouvez appercevoir au loin*"
+
+	procedure affiche_histoire4
+	ECRIRE "*Votre telephone se met subitement a sonner*"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Allo " + nom_joueur + ", le sensei ne repond plus, il a probablement"
+	ECRIRE "        ete capture par la Team Rocket, il faut que tu ailles l aider"
+
+	procedure affiche_histoire2_2
+	ECRIRE "Sacha : Tu pourrais sans doute fouiller le dojo pour trouver des outils qui t aideront."
+
+	procedure affiche_histoire4
+	ECRIRE "*En fouillant le dojo vous trouvez differents remedes*"
+
+	procedure affiche_histoire4
+	ECRIRE "*Tous les PV ont ete restaures*"
+
+	pv_allie <-- pv_allie_max
+	pv_allie2 <-- pv_allie2_max
+	pv_allie3 <-- pv_allie3_max
+
+	procedure affiche_histoire4
+	ECRIRE "*5 potions ont ete rajoutees a votre inventaire*"
+	nbr_potion <-- nbr potion + 5
+
+	procedure affiche_histoire4
+	ECRIRE "*3 pokeballs ont ete rajoutees a votre inventaire*"
+	nbr_pokeball <-- nbr_pokeball + 3
+FIN
+
+BEGIN
+	//*********************************************************************************************************************************************************************
+	//Initialisation des variables
+	//*********************************************************************************************************************************************************************
+
+				//*******************************************************************************************************
+				//Référentiel des valeurs (peut être entièrement commenté)
+				//*******************************************************************************************************
+			
+				//SALAMECHE
+				//nom_salameche <-- "Salameche"
+				//lvl_salameche <-- 1
+				//pv_salameche_max <-- 36 + (2 * lvl_salameche)
+				//atq_salameche <-- 1 + (3* lvl_salameche)
+			
+				//CARAPUCE
+				//nom_carapuce <-- "Carapuce"
+				//lvl_carapuce <-- 1
+				//pv_carapuce_max <-- 44 + (2 * lvl_carapuce)
+				//atq_carapuce <-- 1 + (3* lvl_carapuce)
+			
+				//BULBIZARRE
+				//nom_bulbizarre <-- "Bulbizarre"
+				//lvl_bulbizarre <-- 1
+				//pv_bulbizarre_max <-- 50 + (3 * lvl_bulbizarre)
+				//atq_bulbizarre <-- 1 + (2* lvl_bulbizarre)
+			
+				//ROUCOOL
+				//nom_roucool <-- "Roucool"
+				//lvl_roucool <-- 1
+				//pv_roucool_max <-- 30 + (2 * lvl_roucool)
+				//atq_roucool <-- 2 + (2* lvl_roucool)
+			
+				//PIKACHU
+				//nom_pikachu <-- "Pikachu"
+				//lvl_pikachu<-- 1
+				//pv_pikachu_max <-- 35 + (2 * lvl_pikachu)
+				//atq_pikachu <-- 1 + (2* lvl_pikachu)
+			
+			
+				//RACAILLOU
+				//nom_racaillou <-- "Racaillou"
+				//lvl_racaillou <-- 1
+				//pv_racaillou_max <-- 45 + (3 * lvl_racaillou)
+				//atq_racaillou <-- 1 + (2* lvl_racaillou)
+			
+				//MACHOC
+				//nom_machoc <-- "Machoc"
+				//lvl_machoc <-- 1
+				//pv_machoc_max <-- 39 + (2 * lvl_machoc)
+				//atq_machoc <-- 2 + (3* lvl_machoc)
+			
+				//RATATA
+				//nom_ratata <-- "Ratata"
+				//lvl_ratata <-- 1
+				//pv_ratata_max <-- 32 + (2 * lvl_ratata)
+				//atq_ratata <-- 1 + (4* lvl_ratata)
+			
+				//MAGICARPE
+				//nom_magicarpe <-- "Magicarpe"
+				//lvl_magicarpe <-- 1
+				//pv_magicarpe_max <-- 36 + (2 * lvl_magicarpe)
+				//atq_magicarpe <-- 1 + (3* lvl_magicarpe)
+			
+			
+			
+				//*********************************************************************************************************************************************************************
+				//Déclaration des variables
+				//*********************************************************************************************************************************************************************
+			
+				nom_allie <-- ""
+				pv_allie <-- 0
+				pv_allie_max <-- 0
+				xp_allie <-- 0
+				xp_allie_max <-- 0
+				lvl_allie <-- 1
+				type_allie <-- ""
+				atq_allie <-- 0
+			
+				nom_allie2 <-- ""
+				pv_allie2 <-- 0
+				pv_allie2_max <-- 0
+				xp_allie2 <-- 0
+				xp_allie2_max <-- 0
+				lvl_allie2 <-- 1
+				type_allie2 <-- ""
+				atq_allie2 <-- 0
+			
+				nom_allie3 <-- ""
+				pv_allie3 <-- 0
+				pv_allie3_max <-- 0
+				xp_allie3 <-- 0
+				xp_allie3_max <-- 0
+				lvl_allie3 <-- 1
+				type_allie3 <-- ""
+				atq_allie3 <-- 0
+			
+				nom_ennemi <-- ""
+				lvl_ennemi <-- 1
+				type_ennemi <-- ""
+				pv_ennemi <-- 0
+				atq_ennemi <-- 0
+				procedure ennemi_stats
+				
+				dresseur := true
+				procedure intro
+
+				dresseur := false
+				procedure histoire1
+
+				dresseur := true
+				procedure histoire2
+
+				dresseur := false
+				procedure histoire3
+
+				procedure histoire4
+
+FIN
+
