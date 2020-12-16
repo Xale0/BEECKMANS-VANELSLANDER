@@ -127,7 +127,7 @@ procedure affiche_histoire2_2;
 //ENTREE rien
 //SORTIE l illustration de la seconde phase d' histoire
 BEGIN
-	writeln('	    .------.     ');
+	writeln('	        .------.     ');
 	writeln('          /         \   ');
 	writeln('         .  /_\      `. ');
 	writeln('  _______|____________| ');
@@ -190,6 +190,27 @@ BEGIN
 	writeln('/ ^ ^ ^  ^  ^  ^   ||||||||||||||||||||||||||||||oooooooooo| |ooooooo');
 	writeln('ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo');
 
+END;
+
+procedure affiche_histoire5;
+BEGIN
+	TextColor(Red);
+	writeln('RRRRRRRRRRRRRRRRRRRRRR');
+	writeln('RRRRRRRRRRRRRRRRRRRRRR');
+	writeln('RRRRRR          RRRRRR');
+	writeln('RRRRRR          RRRRRR');
+	writeln('RRRRRR          RRRRRR');
+	writeln('RRRRRR          RRRRRR');
+	writeln('RRRRRRRRRRRRRRRRRRRRRR');
+	writeln('RRRRRRRRRRRRRRRRRRRRRR');
+	writeln('RRRRRR      RRRRRR');
+	writeln('RRRRRR       RRRRRR');
+	writeln('RRRRRR        RRRRRR');
+	writeln('RRRRRR         RRRRRR');
+	writeln('RRRRRR          RRRRRR');
+	writeln('RRRRRR           RRRRRR');
+	writeln('RRRRRR            RRRRRR');
+	TextColor(White);
 END;
 
 
@@ -1372,21 +1393,25 @@ BEGIN
 	TextColor(White);
 	writeln('Niveau : ' , lvl_ennemi);
 	writeln('PV : ' , pv_ennemi , '/' , pv_ennemi_max);
+	delay(1000);
 	affiche_pokemon(nom_ennemi);
+	delay(1000);
 
 
 	color_allie;
 
 
-	GoToXY(50,15);
-	write(nom_allie , '(' , type_allie , ')');
+	//GoToXY(50,1);
+	writeln(nom_allie , '(' , type_allie , ')');
 	TextColor(White);
-	GoToXY(50,16);
-	write('Niveau : ' , lvl_allie);
-	GoToXY(50,17);
-	write('PV : ' , pv_allie , '/' , pv_allie_max);
-	GoToXY(50,18);
+	//GoToXY(50,2);
+	writeln('Niveau : ' , lvl_allie);
+	//GoToXY(50,3);
+	writeln('PV : ' , pv_allie , '/' , pv_allie_max);
+	//GoToXY(50,4);
+	delay(1000);
 	affiche_pokemon(nom_allie);
+
 
 END;
 
@@ -2144,56 +2169,204 @@ procedure histoire4;
 //ENTREE rien
 //SORTIE le lancement d un combat avec les pokemons de l allie et l affichage de la quatrieme histoire
 BEGIN
+	clrscr;
 	affiche_histoire4;
 	writeln('*Alors que vous vous avancez vers le dojo,*');
 	writeln('*vous remarquez qu il est defendu par un Machoc.*');
+	readln;
 
+	clrscr;
 	affiche_histoire4;
 	writeln('*Vous voyant approcher le Pokemon vous fonce dessus*');
+	readln;
 
 	nom_ennemi := 'Machoc';
 	lvl_ennemi := 7;
 	ennemi_stats;
 	combat;
 
+	clrscr;
 	affiche_histoire4;
 	writeln('*Le machoc sonne semble avoir retrouve ses esprits*');
+	readln;
 
+	clrscr;
 	affiche_histoire4;
 	writeln('*Le dojo, si plein de vie actuellement vous semble totalement vide*');
+	readln;
 
+	clrscr;
 	affiche_histoire4;
 	writeln('*Machoc, inquiet, pointe une immense tour decoree d un grand R rouge*');
 	writeln('*Que vous pouvez appercevoir au loin*');
+	readln;
 
+	clrscr;
 	affiche_histoire4;
 	writeln('*Votre telephone se met subitement a sonner*');
+	readln;
 
+	clrscr;
 	affiche_histoire2_2;
 	writeln('Sacha : Allo " + nom_joueur + ", le sensei ne repond plus, il a probablement');
 	writeln('        ete capture par la Team Rocket, il faut que tu ailles l aider');
+	readln;
 
+	clrscr;
 	affiche_histoire2_2;
 	writeln('Sacha : Tu pourrais sans doute fouiller le dojo pour trouver des outils qui t aideront.');
+	readln;
 
+	clrscr;
 	affiche_histoire4;
 	writeln('*En fouillant le dojo vous trouvez differents remedes*');
+	readln;
 
+	clrscr;
 	affiche_histoire4;
 	writeln('*Tous les PV ont ete restaures*');
+	readln;
 
 	pv_allie := pv_allie_max;
 	pv_allie2 := pv_allie2_max;
 	pv_allie3 := pv_allie3_max;
 
+	clrscr;
 	affiche_histoire4;
 	writeln('*5 potions ont ete rajoutees a votre inventaire*');
 	nbr_potion := nbr_potion + 5;
+	readln;
 
+	clrscr;
 	affiche_histoire4;
 	writeln('*3 pokeballs ont ete rajoutees a votre inventaire*');
 	nbr_pokeball := nbr_pokeball + 3;
+	readln;
 END;
+
+
+procedure histoire5;
+
+Var touche_ratata : integer;
+	combat_ratata, valide_ratata : boolean;
+BEGIN
+	clrscr;
+	affiche_histoire5;
+	writeln('*Alors que vous vous apporchez de la tour,*');
+	writeln('*Un garde vous interpelle.*');
+	readln;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('Sbire : Tu n as rien a faire ici !');
+	writeln('        Mon Ratata va te faire regretter de t etre aventure si loin');
+	readln;
+
+	dresseur := true;
+	nom_ennemi := 'Ratata';
+	lvl_ennemi := 7;
+	ennemi_stats;
+	combat;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('Sbire : AAAAH, tu es doué !');
+	writeln('        Je risque gros a te laisser rentrer mais ton talent m a montre que tu es un dresseur digne de confiance');
+	readln;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('Sbire : Tiens, prends ça pour ne pas te faire repérer');
+	readln;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('*Le sbire vous donne son uniforme*');
+	readln;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('Sbire : Nous avons enferme le Sensei au cinquieme etage, car il en savit trop ! Tu pourras le liberer grace a ma carte magnetique');
+	writeln('        il en sait beaucoup plus que moi sur le projet Pascal il pourra sans doute t aider !');
+	readln;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('*Alors que vous parcourrez le batiment, vous croisez ce qui semble etre une usine a Ratata*');
+	readln;
+
+	clrscr;
+	affiche_histoire5;
+	valide_ratata := false;
+	while (valide_ratata = false) do
+	begin
+		writeln('*Voulez vous en affronter un ?*');
+		writeln('1 : Oui');
+		writeln('2 : Non');
+		readln(touche_ratata);
+		case touche_ratata of
+			1:	begin
+					valide_ratata := true;
+					combat_ratata := true;
+				end;
+			2:	begin
+					valide_ratata := true;
+					combat_ratata := false;
+				end;
+		end;
+	end;
+
+	while (combat_ratata = true) do
+	begin
+
+		ennemi_stats;
+		combat;
+
+		valide_ratata := false;
+		while (valide_ratata = false) do
+		begin
+			clrscr;
+			writeln('Voulez-vous en affronter un autre ?');
+			writeln('1 : OUI');
+			writeln('2 : Non');
+			readln(touche_ratata);
+			case touche_ratata of
+				1:	begin
+						valide_ratata := true;
+						combat_ratata := true;
+					end;
+				2:	begin
+						valide_ratata := true;
+						combat_ratata := false;
+					end;
+			end;
+		end;
+	end;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('*Alors que vous gravissez les marches, vous appercevez enfin le vieil homme*');
+	readln;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('Sensei : Bonjour ' , nom_joueur , ' j attendais ton arrivee...');
+	writeln('         J imagine que tu es la pour mettre fin au projet Pascal...');
+	readln;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('Sensei : Tu trouveras leur chef sur l ile au centre du lac a cote d ici...');
+	writeln('         Ne me prends pas avec toi tu risques d attirer l attention...');
+	readln;
+
+	clrscr;
+	affiche_histoire5;
+	writeln('*Vous quittez le batiment et vous dirigez tout droit vers le lieu indique*');
+	readln;
+
+END;
+
 
 procedure fin;
 BEGIN
@@ -2203,6 +2376,67 @@ BEGIN
 	combat;
 END;
 
+var quit : boolean;
+	touche_achat : integer;
+
+procedure centre_pokemon;
+BEGIN
+	quit := false;
+	while (quit = false) do
+	begin
+		clrscr;
+		writeln('                      Bienvenue au centre Pokemon !');
+		delay(100);
+		writeln('Vous avez ' , argent , ' pokedollars');
+		writeln('Que voulez vous faire ?');
+		writeln('');
+		writeln('1: Soigner tous (100Pk)');
+		writeln('2 : Acheter Potion (50Pk)');
+		writeln('3 : Acheter Pokeball(50Pk)');
+		writeln('4 : Quitter');
+		readln(touche_achat);
+
+		case touche_achat of
+			1:	begin
+					if (argent >= 100) then
+					begin
+						argent := argent - 100;
+						writeln('Achat valide');
+					end
+					else
+					begin
+						writeln('Vous n avez pas assez d argent');
+					end;
+				end;
+			2:	begin
+					if (argent >= 50) then
+					begin
+						argent := argent - 50;
+						writeln('Achat valide');
+					end
+					else
+					begin
+						writeln('Vous n avez pas assez d argent');
+					end;
+				end;
+			3:	begin
+					if (argent >= 50) then
+					begin
+						argent := argent - 50;
+						writeln('Achat valide');
+					end
+					else
+					begin
+						writeln('Vous n avez pas assez d argent');
+					end;
+				end;
+			4:	begin
+					quit := true;
+					writeln('Au revoir !');
+				end;
+		end;
+	end;
+END;
 BEGIN
 
 
@@ -2272,6 +2506,12 @@ BEGIN
 
 	dresseur := false;
 	histoire3;
+
+	histoire4;
+
+	histoire5;
+
+
 
 
 
