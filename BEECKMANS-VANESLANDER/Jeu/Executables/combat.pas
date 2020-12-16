@@ -213,6 +213,17 @@ BEGIN
 	TextColor(White);
 END;
 
+procedure affiche_histoire6;
+BEGIN
+
+	writeln('                      _\/_             ');
+	writeln('                      //o\  _\/_       ');
+	writeln('   _____ _ __ __ ____ _ | __/o\\ _     ');
+	writeln(' =-=-_-__=_-= _=_=-=_,- |    -|-,_     ');
+	writeln('  =- _=-=- -_=-=_,-"          |        ');
+	writeln('jgs =- =- -=.--"                       ');
+END;
+
 
 
 //proceedures déterminant les attaques de chacuns des pokemons disponibles
@@ -2367,13 +2378,133 @@ BEGIN
 
 END;
 
+procedure histoire6;
 
+VAR i :integer;
+
+
+BEGIN
+	clrscr;
+	affiche_histoire6;
+	writeln('*Alors que vous vous appertez a traverser le ponton qui mene a l ile centrale...*');
+	readln;
+
+	clrscr;
+	affiche_histoire6;
+	writeln('*Une armee de Magicarpe saute hors de l haut et vous bloque le passage, il vous faudra tous les affronter si voous voulez pouvoir passer*');
+	readln;
+	nom_ennemi := 'Magicarpe';
+	lvl_ennemi := 10;
+	for i:= 1 to 6 do
+	begin
+		ennemi_stats;
+		combat;
+	end;
+	clrscr;
+	affiche_histoire6;
+	writeln('*Une fois les Magicarpes vaincus, vous reprenez votre route*');
+	readln;
+
+END;
 procedure fin;
 BEGIN
+
+	clrscr;
+	affiche_histoire6;
+	writeln('*Alors que vous debarquez sur l ile, vous faites une surprenante rencontre...*');
+	readln;
+
+	clrscr;
+	affiche_intro;
+	writeln('Pr. Hatton : Bien joue dresseur, tu as fait preuve de bravoure aujourd hui');
+	readln;
+
+	clrscr;
+	affiche_intro;
+	writeln('Pr. Hatton : Il te reste cependant une derniere epreuve a passer');
+	readln;
+
+	clrscr;
+	affiche_intro;
+	writeln('Pr. Hatton : Pour mettre fin aux troubles de la region, tu devras abattre Pascal,');
+	writeln('             un langage de ma creation...');
+	readln;
+
+	clrscr;
+	affiche_intro;
+	writeln('Pr. Hatton : Il s agit d un langage tellement complexe et ancien, que les plus grands');
+	writeln('              cerveaux de notre monde sont devenu fou en essayant de le dechiffrer');
+	readln;
+
+	clrscr;
+	affiche_intro;
+	writeln('Pr. Hatton : Les Pokemons ont bien ressenti l aura malefique de cette langue, d ou leur agressivite recente...');
+	writeln('             S il te plait ' , nom_joueur , ' aide moi a mettre un terme a ce malefice');
+	readln;
+
 	nom_ennemi := 'Pascal';
 	pv_ennemi := 300;
 	pv_ennemi_max := 300;
 	combat;
+
+	clrscr;
+	affiche_intro;
+	writeln('Pr. Hatton : Merci dresseur, maintenant que Pascal n est plus,');
+	writeln('             Kanto sera enfin une region plus sure pour humains et Pokemons');
+	readln;
+
+	clrscr;
+	affiche_intro;
+	writeln('Pr. Hatton : Quand nous serons de retour a Jadielle, je t offriai ton premeir Pokedex,');
+	writeln('             tu l as bien merite !!');
+	readln;
+
+	clrscr;
+	affiche_intro;
+	writeln('Pr. Hatton : Grace a lui tu pourras referencer tous les pokemons de la region');
+	writeln('             il sera pour toi un outil essentiel dans tres prochaines aventures');
+	readln;
+
+	clrscr;
+	affiche_histoire6;
+	writeln('*Vous rentrez chez vous apres cette aventure plus qu atypique*');
+	writeln('*Cette journee fut mouvementee et ce ne sera certainement pas la Derniere...*');
+	readln;
+
+
+	clrscr;
+	write('M');
+	delay(10);
+	write('E');
+	delay(10);
+	write('R');
+	delay(10);
+	write('C');
+	delay(10);
+	write('I ');
+	delay(10);
+	write(nom_joueur);
+	delay(10);
+	write(' D ');
+	delay(10);
+	write('A');
+	delay(10);
+	write('V');
+	delay(10);
+	write('O');
+	delay(10);
+	write('I');
+	delay(10);
+	write('R ');
+	delay(10);
+	write('J');
+	delay(10);
+	write('O');
+	delay(10);
+	write('U');
+	delay(10);
+	write('E');
+	delay(10);
 END;
 
 var quit : boolean;
