@@ -2395,11 +2395,14 @@ BEGIN
 	readln;
 	nom_ennemi := 'Magicarpe';
 	lvl_ennemi := 10;
+
 	for i:= 1 to 6 do
 	begin
 		ennemi_stats;
 		combat;
 	end;
+
+
 	clrscr;
 	affiche_histoire6;
 	writeln('*Une fois les Magicarpes vaincus, vous reprenez votre route*');
@@ -2538,6 +2541,7 @@ BEGIN
 					begin
 						writeln('Vous n avez pas assez d argent');
 					end;
+					readln;
 				end;
 			2:	begin
 					if (argent >= 50) then
@@ -2549,6 +2553,7 @@ BEGIN
 					begin
 						writeln('Vous n avez pas assez d argent');
 					end;
+					readln;
 				end;
 			3:	begin
 					if (argent >= 50) then
@@ -2560,14 +2565,124 @@ BEGIN
 					begin
 						writeln('Vous n avez pas assez d argent');
 					end;
+					readln;
 				end;
 			4:	begin
 					quit := true;
 					writeln('Au revoir !');
+					readln;
 				end;
 		end;
 	end;
 END;
+
+procedure Mouv;
+
+var 
+ch : char;
+px, py : integer;
+fin_mouv : boolean;
+
+BEGIN
+		fin_mouv := false;
+		while (fin_mouv = false) do
+		begin
+			clrscr;
+			cursoroff;
+			writeln('                                                                                                                                                  ');
+			writeln('                                                                                                                                                  ');
+			writeln('                                                                                                                                                  ');
+			writeln('                                                                                                                                                  ');
+			writeln('                                                                                                                                                  ');
+			writeln('                        ,@@@@@@@,                                                                  ,@@@@@@@,                                      ');
+			writeln('           ,,,.   ,@@@@@@/@@,  .oo8888o.                                              ,,,.   ,@@@@@@/@@,  .oo8888o.                               ');
+			writeln('        ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o                                          ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o                              ');
+			writeln('       ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88                                         ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88                              ');
+			writeln('       %&&%&%&/%&&%@@\@@/ /@@@88888\88888                  _______                %&&%&%&/%&&%@@\@@/ /@@@88888\88888                 |            ');
+			writeln('       %&&%/ %&%%&&@@\ V /@@  `88\8 `/88                  /______/\               %&&%/ %&%%&&@@\ V /@@  `88\8 `/88                               ');
+			writeln('       `&%\ ` /%&     |.|        \  |8                    |  H   | |              `&%\ ` /%&     |.|        \  |8                  |              ');
+			writeln('           |o|        | |         | |                     |  _   | |                  |o|        | |         | |                                  ');
+			writeln('           |.|        | |         | |                     | | |  | |                  |.|        | |         | |                 |                ');
+			writeln('       \\/ ._\//_/__/  ,\_//__\\/.  \_//__/_                                      \\/ ._\//_/__/  ,\_//__\\/.  \_//__/_        _                  ');
+			writeln('                                                        |            |                                             ___________|_|__               ');
+			writeln('                                                        |            |                                         ___/___________|_|__\              ');
+			writeln('                                                        |            |                                        /               | |  /|             ');
+			writeln('                                                        |            |                                       /____________________/ |             ');
+			writeln('________________________________________________________|            |_______________________________________|                    | |             ');
+			writeln('                                                                                                            _|                    | |             ');
+			writeln('                                                                                                           | |                    | |             ');
+			writeln('                                                                                                           | |                    | |             ');
+			writeln('                                                                                                           | |                    | |             ');
+			writeln('                                                                                                           | |                    | |             ');
+			writeln('___________________________________________________________________________________________________________|_|____________________| |             ');
+			px := 1;
+			py := 23;
+			GoToxy(px,py);
+			write('     o   ');
+			GoToxy(px,py + 1);
+			write('    /|\  ');
+			GoToxy(px,py + 2);
+			write('    / \  ');
+			repeat
+			begin
+	    		ch:=ReadKey;
+	   			case ch of
+	     			#0 :begin
+	            			ch:=ReadKey;
+	            			case ch of
+	             			#75:begin 	
+	             					GoToxy(px,py);
+	             					Write(' ');
+	             					px := px - 1;
+	             				end;
+	             			#77:begin
+	             					GoToxy(px,py);
+	             					write(' ');
+	             					px := px + 1;
+	             				end;
+	             			#80:begin
+	             					GoToxy(px,py);
+	             					write(' ');
+	             					GoToxy(px + 1,py);
+	             					write('   ');
+	             					GoToxy(px + 2,py);
+	             					write('     ');
+	             					py := py + 1;
+	             				end;
+	             			#72:begin
+	             					GoToxy(px,py);
+	             					write(' ');
+	             					GoToxy(px + 1,py + 1);
+	             					write('   ');
+	             					GoToxy(px + 2,py + 2);
+	             					write('     ');
+	             					py := py - 1;
+	             				end;
+	             			end;
+	       				    GoToxy(px,py);
+	             			writeln('     o   ');
+	             			GoToxy(px,py + 1);
+							writeln('    /|\  ');
+							GoToxy(px,py + 2);
+							writeln('    / \  ');
+	             		end;
+	             		    
+	            end;
+        	end;
+
+		
+	 		until ((py <= 14) AND (py >= 11) AND (px <= 60) AND (px >= 56)) OR ((px >= 98) AND (px <= 120) AND (py >= 20) AND (py <= 25));
+	 		if (py <= 14) then //on ne verifie qu une valeur car on sait tres bien avec cette seule variable qu on se trouve sur le centre Pokemon
+	 		begin
+	 			centre_pokemon;
+	 		end
+	 		else
+	 		begin
+	 			fin_mouv := true;
+	 		end;
+	 	end;
+END;
+
 BEGIN
 
 
@@ -2629,21 +2744,30 @@ BEGIN
 	intro;
 	pv_allie := pv_allie_max;
 
+	Mouv;
+
 	dresseur := false;
 	histoire1;
 
+
 	dresseur := true;
 	histoire2;
+
+	Mouv;
 
 	dresseur := false;
 	histoire3;
 
 	histoire4;
 
+	Mouv;
+
 	histoire5;
 
 
+	histoire6;
 
+	Mouv;
 
 
 	dresseur:= true;
