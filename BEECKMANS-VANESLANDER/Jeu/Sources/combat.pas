@@ -221,7 +221,7 @@ BEGIN
 	writeln('   _____ _ __ __ ____ _ | __/o\\ _     ');
 	writeln(' =-=-_-__=_-= _=_=-=_,- |    -|-,_     ');
 	writeln('  =- _=-=- -_=-=_,-"          |        ');
-	writeln('jgs =- =- -=.--"                       ');
+	writeln('    =- =- -=.--"                       ');
 END;
 
 
@@ -254,7 +254,7 @@ procedure attaque_salameche;
 								if (type_ennemi = 'eau') then
 								begin
 									pv_ennemi := pv_ennemi - (2 * atq_allie);
-									writeln('Ce n est pas très efficace');
+									writeln('Ce n est pas tres efficace');
 								end
 								else
 								begin
@@ -353,7 +353,7 @@ procedure attaque_bulbizarre;
 								if (type_ennemi = 'feu') OR (type_ennemi = 'vol') then
 								begin
 									pv_ennemi := pv_ennemi - (1 * atq_allie);
-									writeln('Ce n est pas très efficace');
+									writeln('Ce n est pas tres efficace');
 								end
 								else
 								begin
@@ -401,7 +401,7 @@ procedure attaque_roucool;
 								if (type_ennemi = 'roche') OR (type_ennemi = 'electrique') then
 								begin
 									pv_ennemi := pv_ennemi - (1 * atq_allie);
-									writeln('Ce n est pas très efficace');
+									writeln('Ce n est pas tres efficace');
 								end
 								else
 								begin
@@ -450,7 +450,7 @@ procedure attaque_pikachu;
 								if (type_ennemi = 'roche') OR (type_ennemi = 'plante') then
 								begin
 									pv_ennemi := pv_ennemi - (2 * atq_allie);
-									writeln('Ce n est pas très efficace');
+									writeln('Ce n est pas tres efficace');
 								end
 								else
 								begin
@@ -499,7 +499,7 @@ procedure attaque_racaillou;
 								if (type_ennemi = 'combat') OR (type_ennemi = 'eau') then
 								begin
 									pv_ennemi := pv_ennemi - (1 * atq_allie);
-									writeln('Ce n est pas très efficace');
+									writeln('Ce n est pas tres efficace');
 								end
 								else
 								begin
@@ -548,7 +548,7 @@ procedure attaque_machoc;
 								if (type_ennemi = 'vol') OR (type_ennemi = 'plante') then
 								begin
 									pv_ennemi := pv_ennemi - (2 * atq_allie);
-									writeln('Ce n est pas très efficace');
+									writeln('Ce n est pas tres efficace');
 								end
 								else
 								begin
@@ -594,7 +594,7 @@ procedure attaque_ratata;
 								if (type_ennemi = 'roche') then
 								begin
 									pv_ennemi := pv_ennemi - (1 * atq_allie);
-									writeln('Ce n est pas très efficace');
+									writeln('Ce n est pas tres efficace');
 								end
 								else
 									begin
@@ -922,7 +922,7 @@ BEGIN
 						if(type_allie = 'plante') then
 						begin
 							pv_allie := pv_allie - 50;
-							writeln('C est très efficace !');
+							writeln('C est tres efficace !');
 						end
 						else
 						begin
@@ -943,7 +943,7 @@ BEGIN
 						if (type_allie = 'feu') OR (type_allie = 'roche') OR (type_allie = 'electrique') then
 						begin
 							pv_allie := pv_allie - 50;
-							writeln('C est très efficace !');
+							writeln('C est tres efficace !');
 						end
 						else
 						begin
@@ -964,7 +964,7 @@ BEGIN
 						if (type_allie = 'eau') OR (type_allie = 'roche') then
 						begin
 							pv_allie := pv_allie - 50;
-							writeln('C est très efficace !');
+							writeln('C est tres efficace !');
 						end
 						else
 						begin
@@ -985,7 +985,7 @@ BEGIN
 						if (type_allie = 'feu') OR (type_allie = 'vol') then
 						begin
 							pv_allie := pv_allie - 50;
-							writeln('C est très efficace !');
+							writeln('C est tres efficace !');
 						end
 						else
 						begin
@@ -1006,7 +1006,7 @@ BEGIN
 						if (type_allie = 'plante') OR (type_allie = 'combat') then
 						begin
 							pv_allie := pv_allie - 50;
-							writeln('C est très efficace !');
+							writeln('C est tres efficace !');
 						end
 						else
 						begin
@@ -1027,7 +1027,7 @@ BEGIN
 						if (type_allie = 'normal') OR (type_allie = 'roche') then
 						begin
 							pv_allie := pv_allie - 50;
-							writeln('C est très efficace !');
+							writeln('C est tres efficace !');
 						end
 						else
 						begin
@@ -1048,7 +1048,7 @@ BEGIN
 						if (type_allie = 'eau') OR (type_allie = 'air') then
 						begin
 							pv_allie := pv_allie - 50;
-							writeln('C est très efficace !');
+							writeln('C est tres efficace !');
 						end
 						else
 						begin
@@ -1678,22 +1678,29 @@ BEGIN
 				victoire := true;
 				writeln('Vous avez gagne !!!');
 				xp_allie := xp_allie + 100; //le pokemon joue gagne donc des points d XP
-				while (xp_allie >= xp_allie_max) do //si l xp du joueur est plus grand que son xp max, il passe au niveau superieur
+				if (lvl_allie < 10) then
 				begin
-					xp_allie := xp_allie - xp_allie_max; // quand le niveau monte, l XP retombe
-					lvl_allie := lvl_allie +1;           // on incremente de 1 la variable nievau
-					xp_allie_max := 80 + (5 * lvl_allie); // l xp necessaire pour passer au niveau d apres augmente
-					writeln('Felicitations !! ' , nom_allie , ' passe au niveau ' , lvl_allie);
+					while (xp_allie >= xp_allie_max) do //si l xp du joueur est plus grand que son xp max, il passe au niveau superieur
+					begin
+						xp_allie := xp_allie - xp_allie_max; // quand le niveau monte, l XP retombe
+						lvl_allie := lvl_allie +1;           // on incremente de 1 la variable nievau
+						xp_allie_max := 80 + (5 * lvl_allie); // l xp necessaire pour passer au niveau d apres augmente
+						writeln('Felicitations !! ' , nom_allie , ' passe au niveau ' , lvl_allie);
+					end;
+					lvl_up; // cette procedure reaffecte de nouvelle stats (plus elevees) au pokemon concerne
+					writeln('Vous avez gagne 50 pokedollars');
+					argent := argent + 50; //le joueur gagne egalement de l argent qu il pourra depenser dans les centres pokemons
+				end
+				else
+				begin
+					writeln('Vous avez atteint le niveau maximum');
 				end;
-				lvl_up; // cette procedure reaffecte de nouvelle stats (plus elevees) au pokemon concerne
-				writeln('Vous avez gagne 50 pokedollars');
-				argent := argent + 50; //le joueur gagne egalement de l argent qu il pourra depenser dans les centres pokemons
 			end
 			//sinon cela veut dire que le joueur n'a plus de pokemons en vie, il a donc perdu le combat
 			else
 			begin
 				writeln('Vous avez perdu !');
-				writeln('Recommençons la ou vous avez echoue');
+				writeln('Recommencons la ou vous avez echoue');
 				readln;
 				writeln('Tous vos PV ont ete restaures');
 				pv_allie := pv_allie_max; //on reaffecte tous les PV au maximum et le joueur peut retenter le combat
@@ -1766,7 +1773,7 @@ BEGIN // les procedures d histoires consistent simplement en un enchainement de 
 
 	clrscr;
 	affiche_intro;
-	writeln('Pr. Hatton : Afin de pouvoir affronter d autres dresseurs, tu devras etre accompgne');
+	writeln('Pr. Hatton : Afin de pouvoir affronter d autres dresseurs, tu devras etre accompagne');
 	writeln('d un petit compagnon.');
 	readln;
 
@@ -2224,7 +2231,7 @@ BEGIN
 
 	clrscr;
 	affiche_histoire2_2;
-	writeln('Sacha : Allo " + nom_joueur + ", le sensei ne repond plus, il a probablement');
+	writeln('Sacha : Allo ' , nom_joueur  ', le sensei ne repond plus, il a probablement');
 	writeln('        ete capture par la Team Rocket, il faut que tu ailles l aider');
 	readln;
 
@@ -2286,13 +2293,13 @@ BEGIN
 
 	clrscr;
 	affiche_histoire5;
-	writeln('Sbire : AAAAH, tu es doué !');
+	writeln('Sbire : AAAAH, tu es doue !');
 	writeln('        Je risque gros a te laisser rentrer mais ton talent m a montre que tu es un dresseur digne de confiance');
 	readln;
 
 	clrscr;
 	affiche_histoire5;
-	writeln('Sbire : Tiens, prends ça pour ne pas te faire repérer');
+	writeln('Sbire : Tiens, prends ca pour ne pas te faire reperer');
 	readln;
 
 	clrscr;
@@ -2302,7 +2309,7 @@ BEGIN
 
 	clrscr;
 	affiche_histoire5;
-	writeln('Sbire : Nous avons enferme le Sensei au cinquieme etage, car il en savit trop ! Tu pourras le liberer grace a ma carte magnetique');
+	writeln('Sbire : Nous avons enferme le Sensei au cinquieme etage, car il en savait trop ! Tu pourras le liberer grace a ma carte magnetique');
 	writeln('        il en sait beaucoup plus que moi sur le projet Pascal il pourra sans doute t aider !');
 	readln;
 
@@ -2391,12 +2398,12 @@ VAR i :integer;
 BEGIN
 	clrscr;
 	affiche_histoire6;
-	writeln('*Alors que vous vous appertez a traverser le ponton qui mene a l ile centrale...*');
+	writeln('*Alors que vous vous appretez a traverser le ponton qui mene a l ile centrale...*');
 	readln;
 
 	clrscr;
 	affiche_histoire6;
-	writeln('*Une armee de Magicarpe saute hors de l haut et vous bloque le passage, il vous faudra tous les affronter si voous voulez pouvoir passer*');
+	writeln('*Une armee de Magicarpe saute hors de l eau et vous bloque le passage, il vous faudra tous les affronter si vous voulez pouvoir passer*');
 	readln;
 	nom_ennemi := 'Magicarpe';
 	lvl_ennemi := 10;
@@ -2465,7 +2472,7 @@ BEGIN
 
 	clrscr;
 	affiche_intro;
-	writeln('Pr. Hatton : Quand nous serons de retour a Jadielle, je t offriai ton premeir Pokedex,');
+	writeln('Pr. Hatton : Quand nous serons de retour a Jadielle, je t offrirai ton premier Pokedex,');
 	writeln('             tu l as bien merite !!');
 	readln;
 
@@ -2514,7 +2521,7 @@ BEGIN
 	write('U');
 	delay(10);
 	write('E');
-	delay(10);
+	readln;
 END;
 
 var quit : boolean;
@@ -2534,8 +2541,8 @@ BEGIN
 		writeln('Que voulez vous faire ?');
 		writeln('');
 		writeln('1: Soigner tous (100Pk)');
-		writeln('2 : Acheter Potion (50Pk)');
-		writeln('3 : Acheter Pokeball(50Pk)');
+		writeln('2 : Acheter Potion (50Pk) Vous en avez : ' , nbr_potion);
+		writeln('3 : Acheter Pokeball(50Pk) Vous en avez : ' , nbr_pokeball);
 		writeln('4 : Quitter');
 
 		while (valide_centre = false) do
@@ -2549,6 +2556,10 @@ BEGIN
 						begin
 							argent := argent - 100;
 							writeln('Achat valide');
+							pv_allie := pv_allie_max;
+							pv_allie2 := pv_allie2_max;
+							pv_allie3 := pv_allie3_max;
+
 						end
 						else
 						begin
@@ -2561,6 +2572,7 @@ BEGIN
 						if (argent >= 50) then
 						begin
 							argent := argent - 50;
+							nbr_potion := nbr_potion + 1;
 							writeln('Achat valide');
 						end
 						else
@@ -2574,6 +2586,7 @@ BEGIN
 						if (argent >= 50) then
 						begin
 							argent := argent - 50;
+							nbr_pokeball := nbr_pokeball + 1;
 							writeln('Achat valide');
 						end
 						else
@@ -2586,7 +2599,7 @@ BEGIN
 						valide_centre := true;
 						quit := true;
 						writeln('Au revoir !');
-						readln;
+						delay(1000);
 					end;
 				else
 				begin
