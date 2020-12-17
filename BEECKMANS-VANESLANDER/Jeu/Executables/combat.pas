@@ -32,7 +32,7 @@ BEGIN
         writeln('                                                                         ');
         writeln('                                                                         ');
         writeln('                                                                         ');
-          	repeat
+          	repeat //Le texte clignote jusqu a ce que le joueur appuie sur une touche
           	begin
           		Textcolor(Red);
     			GoToXY(32, 24);
@@ -239,16 +239,16 @@ procedure attaque_salameche;
 			TextColor(LightRed);
 			writeln('2: Flammeche (Feu)');
 			TextColor(White);
-			while (valide = false) do
+			while (valide = false) do // Pour verifier que le joueur rentre bien une touche valide
 			begin
 				readln(touche_attaque);
 				case touche_attaque of
-						1:  begin
+						1:  begin //la premiere attaque a des degats constants
 								pv_ennemi := pv_ennemi - (3 * atq_allie);
 								writeln(nom_allie , ' Utilise Griffe');
 								valide := true;
 							end;
-						2: 	begin
+						2: 	begin //la seconde attaque a des degats qui dependent du type adverse
 								writeln(nom_allie , ' Utilise Flammeche');
 								valide := true;
 								if (type_ennemi = 'eau') then
@@ -270,7 +270,7 @@ procedure attaque_salameche;
 								end;
 							end;
 						else
-						begin
+						begin // dans le cas ou le joueur a rentré une touche invalide, on le renvoie au debut de la boucle (le fonctionnement sera le meme pour chacune des procedures d attaque)
 							writeln('Veuillez entrer un nombre valide');
 						end;
 				end;
@@ -665,7 +665,7 @@ procedure changement_allie;
 
 			//si le pokemon selectionne n est pas KO, le joueur peut le selectionner et les deux pokemon intervertissent leurs variables afin que ce soit le pokemon selectionne qui soit affiche
 					2:	begin
-							valide := true;
+							valide := true; //le joueur pourra ainsi sortir de la boucle de selection d action car il aura fait un choix valide
 							if (pv_allie2 > 0) then
 							begin
 								pv_tempo := pv_allie;
@@ -775,8 +775,8 @@ procedure lvl_up;
 
 BEGIN
 	case nom_allie of
-		'Salameche'		:	begin
-							pv_allie_max := 36 + (6 * lvl_allie);
+		'Salameche'		:	begin // quand un pokemon passe au niveau superieur on lui reaffecte des stats
+							pv_allie_max := 36 + (6 * lvl_allie); 
 							atq_allie :=  2 + (lvl_allie);
 							end;
 
@@ -831,7 +831,7 @@ Procedure ennemi_stats;
 
 BEGIN
 	case nom_ennemi of
-		'Salameche'	:	begin
+		'Salameche'	:	begin // au moment d appeler un ennemi, on initialise ses stats
 						pv_ennemi_max := 36 + (6 * lvl_ennemi);
 						atq_ennemi := 2 + (lvl_ennemi);
 						type_ennemi := 'feu';
@@ -889,7 +889,7 @@ BEGIN
 						type_ennemi := 'normal';
 						end;
 	end;
-	pv_ennemi := pv_ennemi_max
+	pv_ennemi := pv_ennemi_max;
 END;
 procedure attaque_pascal;
 //BUT Réalisez le comportement du boss
@@ -911,12 +911,13 @@ BEGIN
 	//electrique := 7
 	//normal := 8
 
-	type_boss := random (8);
+	type_boss := random (8); //generation d un nombre aleatoire
+							 // celui-ci determinera le type pris par le bosse
 	writeln(nom_ennemi , ' utilise erreur de compilation !');
 
 	case type_boss of
 
-		1 :			begin
+		1 :			begin //si le chiffre tombe sur 1, le boss sera de type feu ce qui rend son attaque plus ou moins fortes sur differents types
 						type_ennemi := 'feu';
 						if(type_allie = 'plante') then
 						begin
@@ -1089,16 +1090,16 @@ procedure tour_ennemi;
 var attaque_ennemi : integer;
 
 BEGIN
-	attaque_ennemi := random (10);
-	case nom_ennemi of
+	attaque_ennemi := random (10); //generation d un nombre aleatoire qui permet de decider quel attaque va utiliser l adversaire
+	case nom_ennemi of     	
 
 		'Salameche' 	:	begin
-								if (attaque_ennemi > 5) then
+								if (attaque_ennemi > 5) then // l adversaire a une chance sur 2 d utiliser son attaque de base
 								begin
 									pv_allie := pv_allie - (3 * atq_ennemi);
 									writeln(nom_ennemi , ' Utilise Griffe');
 								end
-								else
+								else // l adversaire a une chance sur 2 d utiliser son attaque de type
 								begin
 									writeln(nom_ennemi , ' Utilise Flammeche');
 									if (type_allie = 'eau') then
@@ -1322,7 +1323,7 @@ BEGIN
 								writeln('Mais rien ne se passe...');
 							end;
 
-		'Pascal' 		: 	begin
+		'Pascal' 		: 	begin //le boss est le seul ennemi a avoir un comportement plus specifique, on lui a donc cree une procedure
 							attaque_pascal;
 							end;
 	end;
@@ -1330,6 +1331,7 @@ END;
 
 procedure color_ennemi;
 //pour que la couleur du nom du pokemon soit en accord avec son type
+//cela apporte une aide visuelle au joueur
 
 BEGIN
 	case type_ennemi of
@@ -1404,7 +1406,7 @@ BEGIN
 	TextColor(White);
 	writeln('Niveau : ' , lvl_ennemi);
 	writeln('PV : ' , pv_ennemi , '/' , pv_ennemi_max);
-	delay(1000);
+	delay(1000); // ce delai laisse a l utilisateur le temps de lire toutes les informations notees a l ecran
 	affiche_pokemon(nom_ennemi);
 	delay(1000);
 
@@ -1427,6 +1429,7 @@ BEGIN
 END;
 
 procedure combat;
+	// cette procedure gere tous les combats qui seront lances dans le jeu
 
 var victoire : boolean;
 
@@ -1434,8 +1437,8 @@ BEGIN
 	PlaySound('battle.wav',0,SND_ASYNC); //Lance la musique de combat
 
 	//code du combat
-	victoire := false;
-	fuite := false;
+	victoire := false; // ce booleen sera utilie a la fin du combat pour savoir si le joueur a gagne ou perdu
+	fuite := false;    // ce booleen permettra de determiner si le joueur a fuit ou non
 
 
 	while (victoire = false) do //tant que le joueur n a pas gagne le combat, il le recommencera en boucle
@@ -1453,7 +1456,7 @@ BEGIN
 		begin
 			
 			interface_combat;
-			valide := false;
+			valide := false; //ce booleen permettra de determiner si le joueur a entre une valeur valide ou non
 
 			//interface de selection des attaques
 			while (valide = false) do //pour verifier que le joueur ne rentre pas n importe quoi
@@ -1501,7 +1504,7 @@ BEGIN
 									1:	begin
 											//la potion ne restaure de PV que si le pokemon en a assez et que le joueur a des potions
 											valide := true; //le joueur a fait un choix valide
-											if (nbr_potion > 0) and (pv_allie < pv_allie_max - 30) then
+											if (nbr_potion > 0) and (pv_allie < pv_allie_max - 30) then // on verifie que le joueur a suffisemment de potion et pas trop de PV 
 											begin
 												nbr_potion := nbr_potion-1;
 												writeln(nom_joueur , ' utilise une potion');
@@ -1510,7 +1513,7 @@ BEGIN
 											end
 											else
 											begin
-												if (nbr_potion > 0) and (pv_allie < pv_allie_max) then
+												if (nbr_potion > 0) and (pv_allie < pv_allie_max) then // Si il manque moins de 30PV au joueur, sa vie remonte au maximum
 												begin
 													nbr_potion := nbr_potion-1;
 													pv_allie := pv_allie_max;
@@ -1532,8 +1535,8 @@ BEGIN
 										end;
 									2: 	begin
 											valide := true;
-											chance_capture := random(10);
-											if (dresseur = true) then
+											chance_capture := random(10); // cette variable permet de rajouter de l aleatoire dans la chance de capture d un pokemon
+											if (dresseur = true) then // si le joueur n affronte pas un pokemon sauvage, il ne pourra pas capturer le Pokemon
 											begin
 												writeln('Vous ne pouvez pas capturer un Pokemon appartenant a un dresseur')
 											end
@@ -1617,7 +1620,7 @@ BEGIN
 									else
 									begin
 										fuite := true;
-										victoire := true;
+										victoire := true; // cela permet au joueur de quitter la boucle de combat
 									end;
 								end;
 							end;
@@ -1638,20 +1641,21 @@ BEGIN
 			//si le combat peut continuer, l'ennemi peut attaquer
 			if (pv_allie > 0) and (pv_ennemi > 0) and (fuite = false) then
 			begin
-				tour_ennemi;
+				tour_ennemi; //on appelle la procedure gerant l attaque de l ennemi
 				if (pv_allie < 0) then
 				begin
 					pv_allie := 0 //Pour ne pas afficher de nombres négatifs
 				end;
 			end;
 			delay(1000);
-			if (pv_allie <= 0) AND ((pv_allie2 > 0) OR(pv_allie3 > 0)) then
+			if (pv_allie <= 0) AND ((pv_allie2 > 0) OR(pv_allie3 > 0)) then //si le Pokemon utilise n a plus de points de vie on verifie si
+																			//le joueur a au moins un autre pokemon dispo dans son equipe
 			begin
 				writeln(nom_allie , 'Est KO');
 				writeln('Choisissez son remplacant');
 				writeln('2 : ' , nom_allie2 , ' (' , pv_allie2 , ')' );
 				writeln('3 : ' , nom_allie3 , ' (' , pv_allie3 , ')' );
-				changement_allie;
+				changement_allie; //on appelle la procedure qui gere le changement de pokemon
 				writeln(nom_allie , ' En avant !');
 			end;
 			delay(1000);
@@ -1673,17 +1677,17 @@ BEGIN
 			begin
 				victoire := true;
 				writeln('Vous avez gagne !!!');
-				xp_allie := xp_allie + 100;
-				while (xp_allie >= xp_allie_max) do
+				xp_allie := xp_allie + 100; //le pokemon joue gagne donc des points d XP
+				while (xp_allie >= xp_allie_max) do //si l xp du joueur est plus grand que son xp max, il passe au niveau superieur
 				begin
-					xp_allie := xp_allie - xp_allie_max;
-					lvl_allie := lvl_allie +1;
-					xp_allie_max := 80 + (5 * lvl_allie);
+					xp_allie := xp_allie - xp_allie_max; // quand le niveau monte, l XP retombe
+					lvl_allie := lvl_allie +1;           // on incremente de 1 la variable nievau
+					xp_allie_max := 80 + (5 * lvl_allie); // l xp necessaire pour passer au niveau d apres augmente
 					writeln('Felicitations !! ' , nom_allie , ' passe au niveau ' , lvl_allie);
 				end;
-				lvl_up;
+				lvl_up; // cette procedure reaffecte de nouvelle stats (plus elevees) au pokemon concerne
 				writeln('Vous avez gagne 50 pokedollars');
-				argent := argent + 50;
+				argent := argent + 50; //le joueur gagne egalement de l argent qu il pourra depenser dans les centres pokemons
 			end
 			//sinon cela veut dire que le joueur n'a plus de pokemons en vie, il a donc perdu le combat
 			else
@@ -1692,7 +1696,7 @@ BEGIN
 				writeln('Recommençons la ou vous avez echoue');
 				readln;
 				writeln('Tous vos PV ont ete restaures');
-				pv_allie := pv_allie_max;
+				pv_allie := pv_allie_max; //on reaffecte tous les PV au maximum et le joueur peut retenter le combat
 				pv_allie2 := pv_allie2_max;
 				pv_allie3 := pv_allie3_max;
 				pv_ennemi := pv_ennemi_max;
@@ -1714,7 +1718,8 @@ procedure intro;
 VAR touche_choix : integer;
 	valide_intro : boolean;
 
-BEGIN
+BEGIN // les procedures d histoires consistent simplement en un enchainement de dialogues
+	  // on appelle de temps en temps une procedure de combat
 	clrscr;
 	affiche_intro;
 	writeln('??? : Bienvenue dans le monde merveilleux des Pokemons');
@@ -1790,7 +1795,7 @@ BEGIN
 	writeln('    PV : 42');
 	writeln('    Attaque : 10');
 
-	lvl_allie := 3;
+	lvl_allie := 3; // on initialise deja la valeur des niveaux pour le premier combat
 	lvl_ennemi := 3;
 	valide_intro := false;
 
@@ -1827,7 +1832,7 @@ BEGIN
 				end;
 		end;
 	end;
-	lvl_up;
+	lvl_up; // on initialise les stats des deux pokemons
 	ennemi_stats;
 	pv_allie := pv_allie_max;
 
@@ -2309,7 +2314,7 @@ BEGIN
 	clrscr;
 	affiche_histoire5;
 	valide_ratata := false;
-	while (valide_ratata = false) do
+	while (valide_ratata = false) do // cette boucle permet de verifier que l utilisateur rentre une touche valide
 	begin
 		writeln('*Voulez vous en affronter un ?*');
 		writeln('1 : Oui');
@@ -2327,7 +2332,7 @@ BEGIN
 		end;
 	end;
 
-	while (combat_ratata = true) do
+	while (combat_ratata = true) do // le joueur a la possibilite d affronter des ratata en boucle 
 	begin
 
 		ennemi_stats;
@@ -2396,6 +2401,8 @@ BEGIN
 	nom_ennemi := 'Magicarpe';
 	lvl_ennemi := 10;
 
+
+	//le joueur affrontera 6 Magicarpes
 	for i:= 1 to 6 do
 	begin
 		ennemi_stats;
@@ -2512,11 +2519,13 @@ END;
 
 var quit : boolean;
 	touche_achat : integer;
+	valide_centre : boolean;
 
 procedure centre_pokemon;
 BEGIN
 	quit := false;
-	while (quit = false) do
+	valide_centre:= false;
+	while (quit = false) do //tant que le joueur n a pas decide de quitter le centre on lui repropose les differentes options d achat
 	begin
 		clrscr;
 		writeln('                      Bienvenue au centre Pokemon !');
@@ -2528,50 +2537,62 @@ BEGIN
 		writeln('2 : Acheter Potion (50Pk)');
 		writeln('3 : Acheter Pokeball(50Pk)');
 		writeln('4 : Quitter');
-		readln(touche_achat);
 
-		case touche_achat of
-			1:	begin
-					if (argent >= 100) then
-					begin
-						argent := argent - 100;
-						writeln('Achat valide');
-					end
-					else
-					begin
-						writeln('Vous n avez pas assez d argent');
+		while (valide_centre = false) do
+		begin
+			readln(touche_achat);
+
+			case touche_achat of
+				1:	begin
+						valide_centre := true;
+						if (argent >= 100) then // on verifie que le joueur a suffisamment d argent
+						begin
+							argent := argent - 100;
+							writeln('Achat valide');
+						end
+						else
+						begin
+							writeln('Vous n avez pas assez d argent');
+						end;
+						readln;
 					end;
-					readln;
-				end;
-			2:	begin
-					if (argent >= 50) then
-					begin
-						argent := argent - 50;
-						writeln('Achat valide');
-					end
-					else
-					begin
-						writeln('Vous n avez pas assez d argent');
+				2:	begin
+						valide_centre := true;
+						if (argent >= 50) then
+						begin
+							argent := argent - 50;
+							writeln('Achat valide');
+						end
+						else
+						begin
+							writeln('Vous n avez pas assez d argent');
+						end;
+						readln;
 					end;
-					readln;
-				end;
-			3:	begin
-					if (argent >= 50) then
-					begin
-						argent := argent - 50;
-						writeln('Achat valide');
-					end
-					else
-					begin
-						writeln('Vous n avez pas assez d argent');
+				3:	begin
+						valide_centre := true;
+						if (argent >= 50) then
+						begin
+							argent := argent - 50;
+							writeln('Achat valide');
+						end
+						else
+						begin
+							writeln('Vous n avez pas assez d argent');
+						end;
+						readln;
 					end;
-					readln;
+				4:	begin 
+						valide_centre := true;
+						quit := true;
+						writeln('Au revoir !');
+						readln;
+					end;
+				else
+				begin
+					writeln('Veuillez entrer un nombre valide');
 				end;
-			4:	begin
-					quit := true;
-					writeln('Au revoir !');
-					readln;
-				end;
+			end;
 		end;
 	end;
 END;
@@ -2584,7 +2605,7 @@ px, py : integer;
 fin_mouv : boolean;
 
 BEGIN
-		fin_mouv := false;
+		fin_mouv := false; //permet de determiner si le joueur passe la procedure suivante ou si il retourne a l ecran de deplacement
 		while (fin_mouv = false) do
 		begin
 			clrscr;
@@ -2615,7 +2636,7 @@ BEGIN
 			writeln('                                                                                                           | |                    | |             ');
 			writeln('                                                                                                           | |                    | |             ');
 			writeln('___________________________________________________________________________________________________________|_|____________________| |             ');
-			px := 1;
+			px := 1; //initialisation de la position de depart
 			py := 23;
 			GoToxy(px,py);
 			write('     o   ');
@@ -2626,6 +2647,8 @@ BEGIN
 			repeat
 			begin
 	    		ch:=ReadKey;
+	    		//on lit la touche entree par le joueur
+	    		//on efface ensuite le personnage pour le decaler dans la bonne direction
 	   			case ch of
 	     			#0 :begin
 	            			ch:=ReadKey;
@@ -2682,6 +2705,8 @@ BEGIN
 	 		end;
 	 	end;
 END;
+
+//Debut du code principal
 
 BEGIN
 
