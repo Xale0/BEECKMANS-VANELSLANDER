@@ -1983,7 +1983,7 @@ BEGIN
 
 	clrscr;
 	affiche_histoire2_1;
-	writeln('*Des bruits d explosion provenant d une maison sur votre gauche attirent votre oeuil*');
+	writeln('*Des bruits d explosion provenant d une maison sur votre gauche attirent votre oeil*');
 	readln;
 
 	clrscr;
@@ -2183,7 +2183,7 @@ BEGIN
 
 	clrscr;
 	affiche_histoire3;
-	writeln('*Vous sortez enfin de cette grotte et remarquez ce qui semble etre un dojo a quelques centaines de merdres*');
+	writeln('*Vous sortez enfin de cette grotte et remarquez ce qui semble etre un dojo a quelques centaines de metres*');
 	readln;
 END;
 
@@ -2231,7 +2231,7 @@ BEGIN
 
 	clrscr;
 	affiche_histoire2_2;
-	writeln('Sacha : Allo ' , nom_joueur  ', le sensei ne repond plus, il a probablement');
+	writeln('Sacha : Allo ' , nom_joueur , ', le sensei ne repond plus, il a probablement');
 	writeln('        ete capture par la Team Rocket, il faut que tu ailles l aider');
 	readln;
 
@@ -2275,7 +2275,7 @@ Var touche_ratata : integer;
 BEGIN
 	clrscr;
 	affiche_histoire5;
-	writeln('*Alors que vous vous apporchez de la tour,*');
+	writeln('*Alors que vous vous approchez de la tour,*');
 	writeln('*Un garde vous interpelle.*');
 	readln;
 
@@ -2385,7 +2385,7 @@ BEGIN
 
 	clrscr;
 	affiche_histoire5;
-	writeln('*Vous quittez le batiment et vous dirigez tout droit vers le lieu indique*');
+	writeln('*Vous quittez le batiment et vous vous dirigez tout droit vers le lieu indique*');
 	readln;
 
 END;
@@ -2479,7 +2479,7 @@ BEGIN
 	clrscr;
 	affiche_intro;
 	writeln('Pr. Hatton : Grace a lui tu pourras referencer tous les pokemons de la region');
-	writeln('             il sera pour toi un outil essentiel dans tres prochaines aventures');
+	writeln('             il sera pour toi un outil essentiel dans tes prochaines aventures');
 	readln;
 
 	clrscr;

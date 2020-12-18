@@ -2,6 +2,8 @@ Ce Demake de pokémon a été fait par deux élèves de première de Ludus Acad�
 Pour un leur projet de décembre.
 Il a été réalisé en 10 jours.
 Quelques réglages à avoir sur free pascal :
+Clique droit sur la barre en haut du terminal, et aller dans propriétés
+puis dans configuration.
  - La taille mémoire tampon écran : - Largeur : 317
 				    - Hauteur : 150
 
