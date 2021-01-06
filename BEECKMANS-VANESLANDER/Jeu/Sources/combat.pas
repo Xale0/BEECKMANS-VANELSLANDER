@@ -1746,6 +1746,23 @@ BEGIN // les procedures d histoires consistent simplement en un enchainement de 
 	end;
 
 
+	if (nom_joueur = 'Pascal')then
+	begin
+		nom_ennemi := 'Pascal';
+		pv_ennemi_max := 300;
+		pv_ennemi := pv_ennemi_max;
+		ennemi_stats;
+
+		nom_allie := 'Bulbizarre';
+		lvl_allie := 20;
+		type_allie := 'plante';
+		lvl_up;
+		pv_allie := pv_allie_max;
+
+		combat;
+	end;
+
+
 	clrscr;
 	affiche_intro;
 	writeln('Pr. Hatton : Enchante ' , nom_joueur , ' je suis le professeur Hatton !');
@@ -2545,13 +2562,13 @@ BEGIN
 		writeln('3 : Acheter Pokeball(50Pk) Vous en avez : ' , nbr_pokeball);
 		writeln('4 : Quitter');
 
-		while (valide_centre = false) do
-		begin
+		// while (valide_centre = false) do
+		// begin
 			readln(touche_achat);
 
 			case touche_achat of
 				1:	begin
-						valide_centre := true;
+						//valide_centre := true;
 						if (argent >= 100) then // on verifie que le joueur a suffisamment d argent
 						begin
 							argent := argent - 100;
@@ -2568,7 +2585,7 @@ BEGIN
 						readln;
 					end;
 				2:	begin
-						valide_centre := true;
+						//valide_centre := true;
 						if (argent >= 50) then
 						begin
 							argent := argent - 50;
@@ -2582,7 +2599,7 @@ BEGIN
 						readln;
 					end;
 				3:	begin
-						valide_centre := true;
+						//valide_centre := true;
 						if (argent >= 50) then
 						begin
 							argent := argent - 50;
@@ -2606,7 +2623,7 @@ BEGIN
 					writeln('Veuillez entrer un nombre valide');
 				end;
 			end;
-		end;
+		//end;
 	end;
 END;
 
